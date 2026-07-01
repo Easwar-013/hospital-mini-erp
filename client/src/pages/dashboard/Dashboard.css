@@ -1,0 +1,150 @@
+.welcome-banner {
+
+    background: linear-gradient(135deg, #2563EB, #1E40AF);
+
+    color: white;
+
+    padding: 40px;
+
+    border-radius: 22px;
+
+    margin-bottom: 10px;
+
+    box-shadow: 0 15px 35px rgba(37, 99, 235, .25);
+
+}
+
+.welcome-banner h1 {
+
+    font-size: 34px;
+
+    margin-bottom: 12px;
+
+}
+
+.welcome-banner p {
+
+    width: 70%;
+
+    line-height: 1.7;
+
+    opacity: .95;
+
+}
+
+/* Status Badge */
+
+.badge {
+
+    padding: 6px 14px;
+
+    border-radius: 30px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+}
+
+.admitted {
+
+    background: #DCFCE7;
+
+    color: #15803D;
+
+}
+
+.discharged {
+
+    background: #F3F4F6;
+
+    color: #374151;
+
+}
+
+.dashboard {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 30px;
+}
+
+.card-grid {
+
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 20px;
+}
+
+.dashboard-row {
+
+    display: grid;
+
+    grid-template-columns: 2fr 1fr;
+
+    gap: 20px;
+}
+
+.dashboard-box {
+
+    background: #fff;
+
+    border-radius: 18px;
+
+    padding: 25px;
+
+    box-shadow: 0 10px 25px rgba(0, 0, 0, .06);
+}
+
+.dashboard-box h3 {
+
+    margin-bottom: 20px;
+}
+
+table {
+
+    width: 100%;
+
+    border-collapse: collapse;
+}
+
+th,
+td {
+
+    padding: 14px;
+
+    text-align: left;
+
+    border-bottom: 1px solid #E5E7EB;
+}
+
+th {
+
+    color: #6B7280;
+
+    font-weight: 600;
+}
+
+.appointment-list {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 18px;
+
+    list-style: none;
+}
+
+.appointment-list li {
+
+    padding: 14px;
+
+    background: #F8FAFC;
+
+    border-radius: 10px;
+}

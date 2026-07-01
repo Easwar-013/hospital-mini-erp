@@ -1,0 +1,39 @@
+.quick-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.quick-btn {
+    border: none;
+    background: #F8FAFC;
+    border: 1px solid #E5E7EB;
+    border-radius: 14px;
+    padding: 20px;
+    cursor: pointer;
+    transition: .3s;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.quick-btn svg {
+    font-size: 28px;
+    color: #2563EB;
+}
+
+.quick-btn span {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.quick-btn:hover {
+    background: #2563EB;
+    color: white;
+}
+
+.quick-btn:hover svg {
+    color: white;
+}

@@ -1,0 +1,41 @@
+.system-card {
+
+    background: white;
+
+    border-radius: 18px;
+
+    padding: 25px;
+
+    box-shadow: 0 10px 25px rgba(0, 0, 0, .06);
+
+}
+
+.system-card h2 {
+
+    margin-bottom: 20px;
+
+}
+
+.info-grid {
+
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 20px;
+
+}
+
+.info-grid strong {
+
+    color: #111827;
+
+}
+
+.info-grid p {
+
+    margin-top: 6px;
+
+    color: #64748B;
+
+}

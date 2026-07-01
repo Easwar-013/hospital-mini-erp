@@ -1,0 +1,79 @@
+.settings-card {
+
+    background: #fff;
+
+    border-radius: 18px;
+
+    padding: 25px;
+
+    box-shadow: 0 10px 25px rgba(0, 0, 0, .06);
+
+}
+
+.settings-card h2 {
+
+    margin-bottom: 20px;
+
+}
+
+.form-group {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+    margin-bottom: 18px;
+
+}
+
+.form-group label {
+
+    font-weight: 600;
+
+}
+
+.form-group input,
+.form-group textarea {
+
+    padding: 12px;
+
+    border: 1px solid #E5E7EB;
+
+    border-radius: 10px;
+
+    outline: none;
+
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+
+    border-color: #2563EB;
+
+}
+
+.save-btn {
+
+    padding: 12px 22px;
+
+    border: none;
+
+    background: #2563EB;
+
+    color: white;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    transition: .3s;
+
+}
+
+.save-btn:hover {
+
+    background: #1D4ED8;
+
+}

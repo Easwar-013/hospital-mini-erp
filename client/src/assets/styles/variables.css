@@ -1,0 +1,47 @@
+:root {
+
+    /* ===== COLORS ===== */
+
+    --primary-color: #2563eb;
+    --primary-dark: #1d4ed8;
+    --primary-light: #dbeafe;
+
+    --success-color: #22c55e;
+    --warning-color: #f59e0b;
+    --danger-color: #ef4444;
+
+    --white: #ffffff;
+    --background: #f8fafc;
+    --card-bg: #ffffff;
+
+    --text-primary: #1f2937;
+    --text-secondary: #6b7280;
+
+    --border-color: #e5e7eb;
+
+    /* ===== SHADOW ===== */
+
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, .05);
+
+    --shadow-md: 0 6px 18px rgba(0, 0, 0, .08);
+
+    --shadow-lg: 0 15px 30px rgba(0, 0, 0, .12);
+
+    /* ===== BORDER ===== */
+
+    --radius-sm: 8px;
+
+    --radius-md: 14px;
+
+    --radius-lg: 20px;
+
+    /* ===== SIDEBAR ===== */
+
+    --sidebar-width: 260px;
+
+    --navbar-height: 70px;
+
+    /* ===== ANIMATION ===== */
+
+    --transition: all .3s ease;
+}

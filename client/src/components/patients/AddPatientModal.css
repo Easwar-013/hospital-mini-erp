@@ -1,0 +1,198 @@
+.modal-overlay {
+
+    position: fixed;
+    inset: 0;
+
+    background: rgba(15, 23, 42, .55);
+
+    display: flex;
+    justify-content: center;
+
+    align-items: flex-start;
+    /* CHANGED */
+
+    overflow-y: auto;
+    /* NEW */
+
+    padding: 30px;
+    /* NEW */
+
+    z-index: 999;
+}
+
+.patient-modal {
+
+    width: 650px;
+    max-width: 95%;
+
+    max-height: 90vh;
+    /* NEW */
+
+    overflow-y: auto;
+    /* NEW */
+
+    background: white;
+
+    border-radius: 18px;
+
+    padding: 25px;
+
+    animation: popup .25s ease;
+}
+
+@keyframes popup {
+
+    from {
+
+        transform: scale(.9);
+
+        opacity: 0;
+
+    }
+
+    to {
+
+        transform: scale(1);
+
+        opacity: 1;
+
+    }
+
+}
+
+.modal-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 25px;
+}
+
+.modal-header h2 {
+
+    color: #111827;
+}
+
+.close-btn {
+
+    width: 38px;
+
+    height: 38px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #F1F5F9;
+
+    cursor: pointer;
+
+    font-size: 18px;
+}
+
+.patient-form {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 18px;
+}
+
+.form-row {
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 18px;
+}
+
+.form-group {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+.form-group label {
+
+    font-weight: 600;
+
+    color: #374151;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+
+    padding: 13px 15px;
+
+    border: 1px solid #E5E7EB;
+
+    border-radius: 10px;
+
+    font-size: 15px;
+
+    outline: none;
+
+    transition: .3s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+
+    border-color: #2563EB;
+}
+
+.modal-footer {
+
+    display: flex;
+
+    justify-content: flex-end;
+
+    gap: 15px;
+
+    margin-top: 10px;
+}
+
+.cancel-btn {
+
+    padding: 12px 20px;
+
+    border: 1px solid #CBD5E1;
+
+    border-radius: 10px;
+
+    background: white;
+
+    cursor: pointer;
+}
+
+.save-btn {
+
+    padding: 12px 20px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #2563EB;
+
+    color: white;
+
+    cursor: pointer;
+
+    transition: .3s;
+}
+
+.save-btn:hover {
+
+    background: #1D4ED8;
+}

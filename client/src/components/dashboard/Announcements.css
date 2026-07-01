@@ -1,0 +1,14 @@
+.announcement-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.announcement-list li {
+    padding: 14px;
+    background: #F8FAFC;
+    border-left: 4px solid #2563EB;
+    border-radius: 10px;
+    font-size: 15px;
+}

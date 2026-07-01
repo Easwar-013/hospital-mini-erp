@@ -1,0 +1,206 @@
+.navbar {
+
+    height: 75px;
+
+    background: #fff;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 0 35px;
+
+    border-bottom: 1px solid #E5E7EB;
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 100;
+}
+
+/* Left */
+
+.navbar-left h2 {
+
+    font-size: 28px;
+
+    color: #111827;
+
+    margin-bottom: 4px;
+
+}
+
+.navbar-left span {
+
+    color: #64748B;
+
+    font-size: 13px;
+
+}
+
+/* Search */
+
+.search-box {
+
+    width: 420px;
+
+    display: flex;
+
+    align-items: center;
+
+    background: #F8FAFC;
+
+    border: 1px solid #E2E8F0;
+
+    padding: 12px 18px;
+
+    border-radius: 14px;
+
+    transition: .3s;
+
+}
+
+.search-box:focus-within {
+
+    border-color: #2563EB;
+
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, .12);
+
+}
+
+.search-icon {
+
+    color: #94A3B8;
+
+}
+
+.search-box input {
+
+    width: 100%;
+
+    border: none;
+
+    outline: none;
+
+    background: none;
+
+    margin-left: 12px;
+
+    font-size: 15px;
+
+}
+
+/* Right */
+
+.navbar-right {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 25px;
+
+}
+
+/* Notification */
+
+.notification-btn {
+
+    width: 46px;
+
+    height: 46px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #F1F5F9;
+
+    position: relative;
+
+    cursor: pointer;
+
+    font-size: 18px;
+
+    transition: .3s;
+
+}
+
+.notification-btn:hover {
+
+    background: #DBEAFE;
+
+    color: #2563EB;
+
+}
+
+.notification-count {
+
+    position: absolute;
+
+    top: -4px;
+
+    right: -3px;
+
+    width: 18px;
+
+    height: 18px;
+
+    border-radius: 50%;
+
+    background: #EF4444;
+
+    color: white;
+
+    font-size: 11px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+}
+
+/* Profile */
+
+.navbar-profile {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    cursor: pointer;
+
+}
+
+.navbar-profile img {
+
+    width: 48px;
+
+    height: 48px;
+
+    border-radius: 50%;
+
+}
+
+.navbar-profile h4 {
+
+    font-size: 15px;
+
+    margin-bottom: 2px;
+
+}
+
+.navbar-profile p {
+
+    color: #64748B;
+
+    font-size: 13px;
+
+}

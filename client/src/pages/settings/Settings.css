@@ -1,0 +1,19 @@
+.settings-page {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.settings-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+@media(max-width:900px) {
+
+    .settings-grid {
+        grid-template-columns: 1fr;
+    }
+
+}

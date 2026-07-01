@@ -1,0 +1,98 @@
+.patient-table {
+
+    background: white;
+
+    border-radius: 18px;
+
+    padding: 25px;
+
+    box-shadow: 0 10px 25px rgba(0, 0, 0, .05);
+
+}
+
+.table-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-bottom: 20px;
+
+}
+
+.search-box {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    background: #F8FAFC;
+
+    border: 1px solid #E5E7EB;
+
+    padding: 12px 18px;
+
+    border-radius: 12px;
+
+    width: 320px;
+
+}
+
+.search-box input {
+
+    border: none;
+
+    outline: none;
+
+    background: none;
+
+    width: 100%;
+
+}
+
+.status {
+
+    padding: 6px 14px;
+
+    border-radius: 30px;
+
+    font-size: 13px;
+
+}
+
+.admitted {
+
+    background: #DCFCE7;
+
+    color: #15803D;
+
+}
+
+.edit,
+.delete {
+
+    border: none;
+
+    background: none;
+
+    cursor: pointer;
+
+    font-size: 17px;
+
+    margin-right: 10px;
+
+}
+
+.edit {
+
+    color: #2563EB;
+
+}
+
+.delete {
+
+    color: #EF4444;
+
+}
