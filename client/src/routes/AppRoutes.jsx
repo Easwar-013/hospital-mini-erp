@@ -10,7 +10,7 @@ import Doctors from "../pages/doctors/Doctors";
 import Appointments from "../pages/appointments/Appointments";
 import Billing from "../pages/billing/Billing";
 import Settings from "../pages/settings/Settings";
-import WardManagement from "../pages/wards/WardManagement";
+import WardManagement from "../pages/Wards/WardManagement";
 
 const AppRoutes = () => {
   return (
