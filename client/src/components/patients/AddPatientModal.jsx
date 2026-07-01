@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 
 import { addPatient, updatePatient } from "../../services/patientService";
-
+import { getDoctors } from "../../services/doctorService";
 import "./AddPatientModal.css";
 
 const AddPatientModal = ({
@@ -11,6 +11,7 @@ const AddPatientModal = ({
   selectedPatient,
   onPatientSaved,
 }) => {
+  const [doctors, setDoctors] = useState([]);
   const [formData, setFormData] = useState({
     fullName: "",
     age: "",
@@ -29,7 +30,7 @@ const AddPatientModal = ({
         age: selectedPatient.age,
         gender: selectedPatient.gender,
         phone: selectedPatient.phone,
-        doctor: selectedPatient.doctor,
+        doctor: selectedPatient.doctor?._id || selectedPatient.doctor || "",
         bloodGroup: selectedPatient.bloodGroup,
         status: selectedPatient.status,
         address: selectedPatient.address,
@@ -47,6 +48,21 @@ const AddPatientModal = ({
       });
     }
   }, [selectedPatient, isOpen]);
+
+  useEffect(() => {
+    const fetchDoctors = async () => {
+      try {
+        const data = await getDoctors();
+        setDoctors(data.doctors || []);
+      } catch (error) {
+        toast.error("Failed to load doctors");
+      }
+    };
+
+    if (isOpen) {
+      fetchDoctors();
+    }
+  }, [isOpen]);
 
   const handleChange = (e) => {
     setFormData({
@@ -163,10 +179,12 @@ const AddPatientModal = ({
               onChange={handleChange}
             >
               <option value="">Select Doctor</option>
-              <option>Dr. John</option>
-              <option>Dr. Sarah</option>
-              <option>Dr. David</option>
-              <option>Dr. Priya</option>
+
+              {doctors.map((doctor) => (
+                <option key={doctor._id} value={doctor._id}>
+                  {doctor.fullName}
+                </option>
+              ))}
             </select>
           </div>
 
