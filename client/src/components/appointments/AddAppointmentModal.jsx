@@ -9,6 +9,7 @@ import {
 import { getPatients } from "../../services/patientService";
 import { getDoctors } from "../../services/doctorService";
 import Select from "react-select";
+import { addNotification } from "../../services/notificationService";
 
 import "./AddAppointmentModal.css";
 
@@ -38,8 +39,8 @@ const AddAppointmentModal = ({
         const patientRes = await getPatients();
         const doctorRes = await getDoctors();
 
-        setPatients(patientRes.patients);
-        setDoctors(doctorRes.doctors);
+        setPatients(patientRes || []);
+        setDoctors(doctorRes || []);
       } catch (error) {
         toast.error("Failed to load Patients/Doctors");
       }
@@ -69,12 +70,12 @@ const AddAppointmentModal = ({
     });
   };
 
-  const patientOptions = patients.map((patient) => ({
+  const patientOptions = (patients || []).map((patient) => ({
     value: patient._id,
     label: `${patient.fullName} (${patient.phone})`,
   }));
 
-  const doctorOptions = doctors.map((doctor) => ({
+  const doctorOptions = (doctors || []).map((doctor) => ({
     value: doctor._id,
     label: `${doctor.fullName} - ${doctor.specialization}`,
   }));
@@ -94,11 +95,24 @@ const AddAppointmentModal = ({
 
     try {
       if (selectedAppointment) {
+        console.log("Submitting formData:", formData);
         await updateAppointment(selectedAppointment._id, formData);
+
+        addNotification({
+          icon: "📅",
+          title: "Appointment Updated",
+          message: "Appointment details have been updated.",
+        });
 
         toast.success("Appointment Updated Successfully");
       } else {
         await addAppointment(formData);
+
+        addNotification({
+          icon: "📅",
+          title: "Appointment Booked",
+          message: "A new appointment has been scheduled.",
+        });
 
         toast.success("Appointment Booked Successfully");
       }
@@ -123,7 +137,7 @@ const AddAppointmentModal = ({
             {selectedAppointment ? "Edit Appointment" : "Book Appointment"}
           </h2>
 
-          <button className="close-btn" onClick={onClose}>
+          <button type="button" className="close-btn" onClick={onClose}>
             ✕
           </button>
         </div>
@@ -207,11 +221,19 @@ const AddAppointmentModal = ({
             <select
               name="status"
               value={formData.status}
-              onChange={handleChange}
+              onChange={(e) => {
+                console.log("Status changed:", e.target.value);
+
+                setFormData({
+                  ...formData,
+                  status: e.target.value,
+                });
+              }}
             >
-              <option>Scheduled</option>
-              <option>Completed</option>
-              <option>Cancelled</option>
+              <option value="Pending Approval">Pending Approval</option>
+              <option value="Scheduled">Scheduled</option>
+              <option value="Completed">Completed</option>
+              <option value="Cancelled">Cancelled</option>
             </select>
           </div>
 

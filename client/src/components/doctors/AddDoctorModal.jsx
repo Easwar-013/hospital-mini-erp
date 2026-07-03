@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 import { addDoctor, updateDoctor } from "../../services/doctorService";
+import { addNotification } from "../../services/notificationService";
 
 import "./AddDoctorModal.css";
 
@@ -54,9 +55,21 @@ const AddDoctorModal = ({ isOpen, onClose, selectedDoctor, onDoctorSaved }) => {
       if (selectedDoctor) {
         await updateDoctor(selectedDoctor._id, formData);
 
+        addNotification({
+          icon: "👨‍⚕️",
+          title: "Doctor Updated",
+          message: `${formData.fullName} details have been updated.`,
+        });
+
         toast.success("Doctor Updated Successfully");
       } else {
         await addDoctor(formData);
+
+        addNotification({
+          icon: "👨‍⚕️",
+          title: "Doctor Added",
+          message: `${formData.fullName} joined the hospital.`,
+        });
 
         toast.success("Doctor Added Successfully");
       }
@@ -78,7 +91,7 @@ const AddDoctorModal = ({ isOpen, onClose, selectedDoctor, onDoctorSaved }) => {
         <div className="modal-header">
           <h2>{selectedDoctor ? "Edit Doctor" : "Add Doctor"}</h2>
 
-          <button className="close-btn" onClick={onClose}>
+          <button type="button" className="close-btn" onClick={onClose}>
             ✕
           </button>
         </div>

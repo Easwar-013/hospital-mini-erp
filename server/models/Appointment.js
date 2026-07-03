@@ -8,15 +8,26 @@ const appointmentSchema = new mongoose.Schema(
       unique: true,
     },
 
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "PatientUser",
+      required: true,
+    },
+
     patient: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Patient",
-      required: true,
+      default: null,
     },
 
     doctor: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Doctor",
+      required: true,
+    },
+
+    department: {
+      type: String,
       required: true,
     },
 
@@ -30,10 +41,21 @@ const appointmentSchema = new mongoose.Schema(
       required: true,
     },
 
+    reason: {
+      type: String,
+      default: "",
+   },
+
     status: {
       type: String,
-      enum: ["Scheduled", "Completed", "Cancelled"],
-      default: "Scheduled",
+      enum: [
+        "Pending Approval",
+        "Scheduled",
+        "Rejected",
+        "Completed",
+        "Cancelled",
+      ],
+      default: "Pending Approval",
     },
   },
   {

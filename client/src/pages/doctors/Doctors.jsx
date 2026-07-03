@@ -6,18 +6,19 @@ import "./Doctors.css";
 
 import DoctorTable from "../../components/doctors/DoctorTable";
 import AddDoctorModal from "../../components/doctors/AddDoctorModal";
-
+import { useSearchParams } from "react-router-dom";
 import { getDoctors } from "../../services/doctorService";
 
 const Doctors = () => {
   const [openModal, setOpenModal] = useState(false);
   const [doctors, setDoctors] = useState([]);
   const [selectedDoctor, setSelectedDoctor] = useState(null);
+  const [searchParams] = useSearchParams();
 
   const fetchDoctors = async () => {
     try {
       const data = await getDoctors();
-      setDoctors(data.doctors);
+      setDoctors(data);
     } catch (error) {
       toast.error("Failed to load doctors");
     }
@@ -25,6 +26,11 @@ const Doctors = () => {
 
   useEffect(() => {
     fetchDoctors();
+
+    if (searchParams.get("add") === "true") {
+      setSelectedDoctor(null);
+      setOpenModal(true);
+    }
   }, []);
 
   return (

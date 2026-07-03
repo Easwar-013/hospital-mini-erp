@@ -9,7 +9,7 @@ import {
 
 import { getPatients } from "../../services/patientService";
 import { getWards } from "../../services/wardService";
-
+import { getAppointments } from "../../services/appointmentService";
 import "./GenerateBillModal.css";
 
 const initialFormData = {
@@ -31,6 +31,7 @@ const initialFormData = {
 const GenerateBillModal = ({ isOpen, onClose, selectedBill, onBillSaved }) => {
   const [patients, setPatients] = useState([]);
   const [wards, setWards] = useState([]);
+  const [appointments, setAppointments] = useState([]);
 
   const [formData, setFormData] = useState(initialFormData);
 
@@ -41,9 +42,11 @@ const GenerateBillModal = ({ isOpen, onClose, selectedBill, onBillSaved }) => {
       try {
         const patientRes = await getPatients();
         const wardRes = await getWards();
+        const appointmentRes = await getAppointments();
 
-        setPatients(patientRes.patients);
-        setWards(wardRes.wards);
+        setPatients(patientRes || []);
+        setWards(wardRes || []);
+        setAppointments(appointmentRes || []);
       } catch {
         toast.error("Failed to load data");
       }
@@ -83,10 +86,23 @@ const GenerateBillModal = ({ isOpen, onClose, selectedBill, onBillSaved }) => {
   useEffect(() => {
     if (!formData.patient) return;
 
-    const ward = wards.find((w) => w.patient?._id === formData.patient);
+    // Latest appointment for selected patient
+    const patientAppointments = (appointments || [])
+      .filter((a) => a.patient?._id === formData.patient)
+      .sort(
+        (a, b) => new Date(b.appointmentDate) - new Date(a.appointmentDate),
+      );
+
+    const latestAppointment = patientAppointments[0];
+
+    // Ward (optional)
+    const ward = (wards || []).find((w) => w.patient?._id === formData.patient);
+
+    let wardCharge = 0;
+    let wardId = "";
 
     if (ward) {
-      let wardCharge = 2000;
+      wardId = ward._id;
 
       switch (ward.wardName) {
         case "ICU":
@@ -104,15 +120,15 @@ const GenerateBillModal = ({ isOpen, onClose, selectedBill, onBillSaved }) => {
         default:
           wardCharge = 2000;
       }
-
-      setFormData((prev) => ({
-        ...prev,
-        doctor: ward.doctor._id,
-        ward: ward._id,
-        wardCharge,
-      }));
     }
-  }, [formData.patient, wards]);
+
+    setFormData((prev) => ({
+      ...prev,
+      doctor: latestAppointment?.doctor?._id || "",
+      ward: wardId,
+      wardCharge,
+    }));
+  }, [formData.patient, appointments, wards]);
 
   const totalAmount = useMemo(() => {
     return (
@@ -125,7 +141,7 @@ const GenerateBillModal = ({ isOpen, onClose, selectedBill, onBillSaved }) => {
     );
   }, [formData]);
 
-  const patientOptions = patients.map((patient) => ({
+  const patientOptions = (patients || []).map((patient) => ({
     value: patient._id,
     label: `${patient.patientId} - ${patient.fullName}`,
   }));
@@ -145,10 +161,7 @@ const GenerateBillModal = ({ isOpen, onClose, selectedBill, onBillSaved }) => {
       return;
     }
 
-    if (!formData.ward) {
-      toast.error("Selected patient has no ward assigned");
-      return;
-    }
+
 
     try {
       const payload = {
@@ -156,12 +169,27 @@ const GenerateBillModal = ({ isOpen, onClose, selectedBill, onBillSaved }) => {
         totalAmount,
       };
 
+      if (!payload.ward) {
+        delete payload.ward;
+      }
+
+      if (!payload.doctor) {
+        delete payload.doctor;
+      }
+
       if (selectedBill) {
         await updateBill(selectedBill._id, payload);
+
+        addNotification({
+          icon: "💰",
+          title: "Bill Updated",
+          message: `Invoice ${selectedBill.invoiceNumber} has been updated.`,
+        });
 
         toast.success("Bill Updated Successfully");
       } else {
         await addBill(payload);
+
 
         toast.success("Bill Generated Successfully");
       }
@@ -183,7 +211,7 @@ const GenerateBillModal = ({ isOpen, onClose, selectedBill, onBillSaved }) => {
         <div className="modal-header">
           <h2>{selectedBill ? "Edit Bill" : "Generate Bill"}</h2>
 
-          <button className="close-btn" onClick={onClose}>
+          <button type="button" className="close-btn" onClick={onClose}>
             ✕
           </button>
         </div>
@@ -215,8 +243,9 @@ const GenerateBillModal = ({ isOpen, onClose, selectedBill, onBillSaved }) => {
 
               <input
                 value={
-                  wards.find((w) => w._id === formData.ward)?.doctor
-                    ?.fullName || ""
+                  (appointments || []).find(
+                    (a) => a.doctor?._id === formData.doctor,
+                  )?.doctor?.fullName || ""
                 }
                 readOnly
               />
@@ -227,7 +256,8 @@ const GenerateBillModal = ({ isOpen, onClose, selectedBill, onBillSaved }) => {
 
               <input
                 value={
-                  wards.find((w) => w._id === formData.ward)?.wardName || ""
+                  (wards || []).find((w) => w._id === formData.ward)
+                    ?.wardName || ""
                 }
                 readOnly
               />

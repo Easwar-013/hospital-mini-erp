@@ -49,6 +49,8 @@
 
     display: flex;
 
+    position: relative;
+
     align-items: center;
 
     background: #F8FAFC;

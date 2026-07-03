@@ -1,0 +1,125 @@
+.search-dropdown {
+
+    position: absolute;
+
+    top: 55px;
+
+    left: 0;
+
+    width: 100%;
+
+    background: white;
+
+    border-radius: 14px;
+
+    overflow: hidden;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .15);
+
+    z-index: 9999;
+
+    max-height: 420px;
+
+    overflow-y: auto;
+}
+
+.search-item {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 15px 20px;
+
+    cursor: pointer;
+
+    transition: .25s;
+}
+
+.search-item:hover {
+
+    background: #EFF6FF;
+}
+
+.search-info {
+
+    flex: 1;
+}
+
+.search-info h4 {
+
+    margin: 0;
+
+    font-size: 15px;
+
+    color: #111827;
+}
+
+.search-info span {
+
+    color: #6B7280;
+
+    font-size: 13px;
+}
+
+.search-item small {
+
+    color: #2563EB;
+
+    font-weight: 600;
+}
+
+.search-type-icon {
+
+    width: 38px;
+
+    height: 38px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding: 10px;
+
+    color: white;
+}
+
+.patient {
+
+    background: #2563EB;
+}
+
+.doctor {
+
+    background: #10B981;
+}
+
+.appointment {
+
+    background: #F59E0B;
+}
+
+.ward {
+
+    background: #8B5CF6;
+}
+
+.bill {
+
+    background: #EF4444;
+}
+
+.no-result {
+
+    padding: 20px;
+
+    text-align: center;
+
+    color: #6B7280;
+}

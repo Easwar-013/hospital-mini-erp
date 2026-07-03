@@ -1,0 +1,37 @@
+.notification-dropdown {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    width: 320px;
+    background: white;
+    border-radius: 14px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, .12);
+    z-index: 1000;
+    overflow: hidden;
+}
+
+.notification-dropdown h4 {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.notification-item {
+    display: flex;
+    gap: 12px;
+    padding: 15px;
+    cursor: pointer;
+}
+
+.notification-item:hover {
+    background: #f8fafc;
+}
+
+.notification-item span {
+    font-size: 22px;
+}
+
+.empty {
+    padding: 20px;
+    text-align: center;
+    color: #888;
+}

@@ -1,10 +1,14 @@
 import Bill from "../models/Bill.js";
 
+import Patient from "../models/Patient.js";
+
+
 // =========================================
 // Create Bill
 // =========================================
 export const createBill = async (req, res) => {
   try {
+    console.log(req.body);
     const count = await Bill.countDocuments();
 
     const invoiceNumber =
@@ -50,9 +54,13 @@ export const createBill = async (req, res) => {
       bill,
     });
   } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: error.message,
+      console.log("========== BILL ERROR ==========");
+      console.log(error);
+      console.log(error.stack);
+
+      res.status(500).json({
+        success: false,
+        message: error.message,
     });
   }
 };
@@ -74,6 +82,45 @@ export const getBills = async (req, res) => {
       bills,
     });
   } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+// =========================================
+// Get Logged In Patient Bills
+// =========================================
+export const getMyBills = async (req, res) => {
+  try {
+    console.log("Logged In Patient:", req.user);
+
+    // Find hospital patient using phone number
+    const patient = await Patient.findOne({
+      phone: req.user.phone,
+    });
+
+    if (!patient) {
+      return res.status(404).json({
+        success: false,
+        message: "Patient not found",
+      });
+    }
+
+    const bills = await Bill.find({
+      patient: patient._id,
+    })
+      .populate("doctor", "fullName specialization")
+      .sort({ createdAt: -1 });
+
+    res.status(200).json({
+      success: true,
+      bills,
+    });
+  } catch (error) {
+    console.log(error);
+
     res.status(500).json({
       success: false,
       message: error.message,

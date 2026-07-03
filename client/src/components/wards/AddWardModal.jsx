@@ -31,8 +31,8 @@ const AddWardModal = ({ isOpen, onClose, selectedWard, onWardSaved }) => {
         const patientRes = await getPatients();
         const doctorRes = await getDoctors();
 
-        setPatients(patientRes.patients);
-        setDoctors(doctorRes.doctors);
+        setPatients(patientRes || []);
+        setDoctors(doctorRes || []);
       } catch {
         toast.error("Failed to load data");
       }
@@ -56,12 +56,12 @@ const AddWardModal = ({ isOpen, onClose, selectedWard, onWardSaved }) => {
     }
   }, [selectedWard, isOpen]);
 
-  const patientOptions = patients.map((patient) => ({
+  const patientOptions = (patients || []).map((patient) => ({
     value: patient._id,
     label: `${patient.patientId} - ${patient.fullName}`,
   }));
 
-  const doctorOptions = doctors.map((doctor) => ({
+  const doctorOptions = (doctors || []).map((doctor) => ({
     value: doctor._id,
     label: `${doctor.fullName} | ${doctor.specialization}`,
   }));
@@ -95,9 +95,21 @@ const AddWardModal = ({ isOpen, onClose, selectedWard, onWardSaved }) => {
       if (selectedWard) {
         await updateWard(selectedWard._id, formData);
 
+        addNotification({
+          icon: "🛏️",
+          title: "Ward Updated",
+          message: "Ward assignment has been updated.",
+        });
+
         toast.success("Ward Updated Successfully");
       } else {
         await addWard(formData);
+
+        addNotification({
+          icon: "🛏️",
+          title: "Ward Assigned",
+          message: "A patient has been assigned to a ward.",
+        });
 
         toast.success("Ward Assigned Successfully");
       }
@@ -120,7 +132,7 @@ const AddWardModal = ({ isOpen, onClose, selectedWard, onWardSaved }) => {
         <div className="modal-header">
           <h2>{selectedWard ? "Edit Ward" : "Assign Ward"}</h2>
 
-          <button className="close-btn" onClick={onClose}>
+          <button type="button" className="close-btn" onClick={onClose}>
             ✕
           </button>
         </div>

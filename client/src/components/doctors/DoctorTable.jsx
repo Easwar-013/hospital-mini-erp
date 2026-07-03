@@ -1,4 +1,5 @@
 import "./DoctorTable.css";
+import { useState } from "react";
 
 import { FaSearch, FaEdit, FaTrash } from "react-icons/fa";
 import { toast } from "react-toastify";
@@ -6,6 +7,22 @@ import { toast } from "react-toastify";
 import { deleteDoctor } from "../../services/doctorService";
 
 const DoctorTable = ({ doctors, onEdit, onDelete }) => {
+
+  const [search, setSearch] = useState("");
+
+  const filteredDoctors = doctors.filter((doctor) => {
+    const keyword = search.toLowerCase();
+
+    return (
+      doctor.doctorId?.toLowerCase().includes(keyword) ||
+      doctor.fullName?.toLowerCase().includes(keyword) ||
+      doctor.specialization?.toLowerCase().includes(keyword) ||
+      doctor.phone?.includes(search) ||
+      doctor.email?.toLowerCase().includes(keyword) ||
+      doctor.status?.toLowerCase().includes(keyword)
+    );
+  });
+
   const handleDelete = async (id) => {
     const confirmDelete = window.confirm(
       "Are you sure you want to delete this doctor?",
@@ -30,7 +47,12 @@ const DoctorTable = ({ doctors, onEdit, onDelete }) => {
         <div className="search-box">
           <FaSearch />
 
-          <input type="text" placeholder="Search doctor..." />
+          <input
+            type="text"
+            placeholder="Search doctor..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
         </div>
       </div>
 
@@ -49,14 +71,14 @@ const DoctorTable = ({ doctors, onEdit, onDelete }) => {
         </thead>
 
         <tbody>
-          {doctors.length === 0 ? (
+          {filteredDoctors.length === 0 ? (
             <tr>
               <td colSpan="8" style={{ textAlign: "center" }}>
                 No Doctors Found
               </td>
             </tr>
           ) : (
-            doctors.map((doctor) => (
+            filteredDoctors.map((doctor) => (
               <tr key={doctor._id}>
                 <td>{doctor.doctorId}</td>
 

@@ -1,5 +1,4 @@
 .modal-overlay {
-
     position: fixed;
     inset: 0;
 
@@ -13,15 +12,17 @@
 }
 
 .patient-modal {
+    position: relative;
 
     width: 650px;
     max-width: 95%;
+    max-height: 90vh;
 
     background: white;
 
     border-radius: 18px;
 
-    padding: 25px;
+    overflow-y: auto;
 
     animation: popup .25s ease;
 }
@@ -29,63 +30,80 @@
 @keyframes popup {
 
     from {
-
         transform: scale(.9);
-
         opacity: 0;
-
     }
 
     to {
-
         transform: scale(1);
-
         opacity: 1;
-
     }
 
 }
 
 .modal-header {
 
+    position: sticky;
+    top: 0;
+
     display: flex;
-
     justify-content: space-between;
-
     align-items: center;
 
-    margin-bottom: 25px;
+    padding: 25px;
+
+    background: #fff;
+
+    border-bottom: 1px solid #E5E7EB;
+
+    z-index: 100;
 }
 
 .modal-header h2 {
 
     color: #111827;
+    margin: 0;
 }
 
 .close-btn {
 
-    width: 38px;
-
-    height: 38px;
+    width: 42px;
+    height: 42px;
 
     border: none;
-
     border-radius: 50%;
 
-    background: #F1F5F9;
+    background: #F3F4F6;
+    color: #374151;
+
+    font-size: 26px;
+    font-weight: 700;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     cursor: pointer;
 
-    font-size: 18px;
+    transition: .25s;
+}
+
+.close-btn:hover {
+
+    background: #EF4444;
+    color: white;
+
+    transform: rotate(90deg);
 }
 
 .patient-form {
 
     display: flex;
-
     flex-direction: column;
 
     gap: 18px;
+
+    padding: 25px;
 }
 
 .form-row {

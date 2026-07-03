@@ -1,0 +1,155 @@
+.announcement-page {
+    padding: 30px;
+    background: #f8fafc;
+    min-height: 100vh;
+}
+
+/* Header */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.page-header h1 {
+    font-size: 30px;
+    color: #1e293b;
+    margin: 0;
+}
+
+.page-header p {
+    margin-top: 5px;
+    color: #64748b;
+    font-size: 15px;
+}
+
+/* Add Button */
+.add-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 12px 22px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.add-btn:hover {
+    background: #1d4ed8;
+}
+
+/* Table Container */
+.announcement-table-container {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+    overflow-x: auto;
+}
+
+/* Table */
+.announcement-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.announcement-table thead {
+    background: #f1f5f9;
+}
+
+.announcement-table th,
+.announcement-table td {
+    padding: 16px;
+    text-align: left;
+}
+
+.announcement-table th {
+    color: #334155;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.announcement-table td {
+    color: #475569;
+    border-top: 1px solid #e2e8f0;
+}
+
+/* Status Badge */
+.status-active,
+.status-inactive {
+    padding: 6px 14px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.status-active {
+    background: #dcfce7;
+    color: #15803d;
+}
+
+.status-inactive {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+/* Action Buttons */
+.action-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.edit-btn,
+.delete-btn {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 18px;
+    transition: 0.2s;
+}
+
+.edit-btn {
+    color: #2563eb;
+}
+
+.edit-btn:hover {
+    color: #1d4ed8;
+}
+
+.delete-btn {
+    color: #dc2626;
+}
+
+.delete-btn:hover {
+    color: #991b1b;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .announcement-page {
+        padding: 18px;
+    }
+
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .announcement-table th,
+    .announcement-table td {
+        padding: 12px;
+        font-size: 14px;
+    }
+
+    .add-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}

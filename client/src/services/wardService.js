@@ -3,7 +3,7 @@ import api from "./axios";
 // Get All Wards
 export const getWards = async () => {
   const response = await api.get("/wards");
-  return response.data;
+  return response.data.wards;
 };
 
 // Add Ward

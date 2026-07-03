@@ -7,8 +7,10 @@ import doctorRoutes from "./routes/doctorRoutes.js";
 import appointmentRoutes from "./routes/appointmentRoutes.js";
 import wardRoutes from "./routes/wardRoutes.js";
 import billingRoutes from "./routes/billingRoutes.js";
-
+import dashboardRoutes from "./routes/dashboardRoutes.js";
+import announcementRoutes from "./routes/announcementRoutes.js";
 import connectDB from "./config/db.js";
+import patientUserRoutes from "./routes/patientUserRoutes.js";
 
 dotenv.config();
 
@@ -23,7 +25,9 @@ app.use("/api/doctors", doctorRoutes);
 app.use("/api/appointments", appointmentRoutes);
 app.use("/api/wards", wardRoutes);
 app.use("/api/billing", billingRoutes);
-
+app.use("/api/dashboard", dashboardRoutes);
+app.use("/api/announcements", announcementRoutes);
+app.use("/api/patient-user", patientUserRoutes);
 
 // Test Route
 app.get("/", (req, res) => {
@@ -41,3 +45,5 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`🚀 Server running on http://localhost:${PORT}`);
 });
+
+console.log("Patient User Route Imported");

@@ -211,8 +211,8 @@ const InvoicePreviewModal = ({ isOpen, onClose, bill }) => {
             📄 Download PDF
           </button>
 
-          <button className="close-btn" onClick={onClose}>
-            ✕ Close
+          <button type="button" className="close-btn" onClick={onClose}>
+            ✕
           </button>
         </div>
       </div>

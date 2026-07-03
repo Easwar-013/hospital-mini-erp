@@ -17,7 +17,7 @@ const WardManagement = () => {
   const fetchWards = async () => {
     try {
       const data = await getWards();
-      setWards(data.wards);
+      setWards(data);
     } catch (error) {
       toast.error("Failed to load ward assignments");
     }

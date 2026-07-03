@@ -3,7 +3,7 @@ import api from "./axios";
 // Get All Doctors
 export const getDoctors = async () => {
   const response = await api.get("/doctors");
-  return response.data;
+  return response.data.doctors;
 };
 
 // Add Doctor

@@ -6,6 +6,7 @@ import "./Patients.css";
 
 import PatientTable from "../../components/patients/PatientTable";
 import AddPatientModal from "../../components/patients/AddPatientModal";
+import { useSearchParams } from "react-router-dom";
 
 import { getPatients } from "../../services/patientService";
 
@@ -13,12 +14,13 @@ const Patients = () => {
   const [openModal, setOpenModal] = useState(false);
   const [patients, setPatients] = useState([]);
   const [selectedPatient, setSelectedPatient] = useState(null);
+  const [searchParams] = useSearchParams();
 
   // Load patients
   const fetchPatients = async () => {
     try {
       const data = await getPatients();
-      setPatients(data.patients);
+      setPatients(data);
     } catch (error) {
       toast.error("Failed to load patients");
     }
@@ -26,6 +28,11 @@ const Patients = () => {
 
   useEffect(() => {
     fetchPatients();
+
+    if (searchParams.get("add") === "true") {
+      setSelectedPatient(null);
+      setOpenModal(true);
+    }
   }, []);
 
   return (

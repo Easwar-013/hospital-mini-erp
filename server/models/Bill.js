@@ -19,10 +19,11 @@ const billSchema = new mongoose.Schema(
       required: true,
     },
 
+    // Ward is OPTIONAL
     ward: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Ward",
-      required: true,
+      default: null,
     },
 
     consultationFee: {

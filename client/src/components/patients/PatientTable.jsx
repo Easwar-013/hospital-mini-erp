@@ -1,10 +1,26 @@
 import "./PatientTable.css";
+import { useState } from "react";
 
 import { FaEdit, FaTrash, FaSearch } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { deletePatient } from "../../services/patientService";
 
-const PatientTable = ({ patients, onEdit, onDelete }) => {
+const PatientTable = ({ patients = [], onEdit, onDelete }) => {
+
+  const [search, setSearch] = useState("");
+
+  const filteredPatients = patients.filter((patient) => {
+    const keyword = search.toLowerCase();
+
+    return (
+      patient.patientId?.toLowerCase().includes(keyword) ||
+      patient.fullName?.toLowerCase().includes(keyword) ||
+      patient.phone?.includes(search) ||
+      patient.gender?.toLowerCase().includes(keyword) ||
+      patient.status?.toLowerCase().includes(keyword)
+    );
+  });
+
   const handleDelete = async (id) => {
     const confirmDelete = window.confirm(
       "Are you sure you want to delete this patient?",
@@ -27,7 +43,12 @@ const PatientTable = ({ patients, onEdit, onDelete }) => {
       <div className="table-header">
         <div className="search-box">
           <FaSearch />
-          <input type="text" placeholder="Search patient..." />
+          <input
+            type="text"
+            placeholder="Search patient..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
         </div>
       </div>
 
@@ -46,14 +67,14 @@ const PatientTable = ({ patients, onEdit, onDelete }) => {
         </thead>
 
         <tbody>
-          {patients.length === 0 ? (
+          {filteredPatients.length === 0 ? (
             <tr>
               <td colSpan="8" style={{ textAlign: "center" }}>
                 No Patients Found
               </td>
             </tr>
           ) : (
-            patients.map((patient) => (
+            filteredPatients.map((patient) => (
               <tr key={patient._id}>
                 <td>{patient.patientId}</td>
 
@@ -65,7 +86,7 @@ const PatientTable = ({ patients, onEdit, onDelete }) => {
 
                 <td>{patient.phone}</td>
 
-                <td>{patient.doctor}</td>
+                <td>{patient.doctor?.fullName || "-"}</td>
 
                 <td>
                   <span

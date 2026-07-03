@@ -6,7 +6,7 @@ import "./Billing.css";
 
 import BillingTable from "../../components/billing/BillingTable";
 
-
+import { useSearchParams } from "react-router-dom";
 import GenerateBillModal from "../../components/billing/GenerateBillModal";
 import InvoicePreviewModal from "../../components/billing/InvoicePreviewModal";
 import { getBills } from "../../services/billingService";
@@ -16,6 +16,7 @@ const Billing = () => {
   const [selectedBill, setSelectedBill] = useState(null);
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewBill, setPreviewBill] = useState(null);
+  const [searchParams] = useSearchParams();
 
   const fetchBills = async () => {
     try {
@@ -23,7 +24,7 @@ const Billing = () => {
 
       console.log(data);
 
-      setBills(data.bills);
+      setBills(data || []);
     } catch (error) {
       console.error(error);
 
@@ -33,6 +34,11 @@ const Billing = () => {
 
   useEffect(() => {
     fetchBills();
+
+    if (searchParams.get("add") === "true") {
+      setSelectedBill(null);
+      setOpenModal(true);
+    }
   }, []);
 
   return (

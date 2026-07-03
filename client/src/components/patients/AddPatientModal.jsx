@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 
 import { addPatient, updatePatient } from "../../services/patientService";
 import { getDoctors } from "../../services/doctorService";
+import { addNotification } from "../../services/notificationService";
 import "./AddPatientModal.css";
 
 const AddPatientModal = ({
@@ -53,8 +54,12 @@ const AddPatientModal = ({
     const fetchDoctors = async () => {
       try {
         const data = await getDoctors();
-        setDoctors(data.doctors || []);
+
+        console.log("Doctor API Response:", data);
+
+        setDoctors(data || []);
       } catch (error) {
+        console.error(error);
         toast.error("Failed to load doctors");
       }
     };
@@ -88,9 +93,21 @@ const AddPatientModal = ({
       if (selectedPatient) {
         await updatePatient(selectedPatient._id, formData);
 
+        addNotification({
+          icon: "🧑",
+          title: "Patient Updated",
+          message: `${formData.fullName}'s details have been updated.`,
+        });
+
         toast.success("Patient Updated Successfully");
       } else {
         await addPatient(formData);
+
+        addNotification({
+          icon: "🧑",
+          title: "New Patient",
+          message: `${formData.fullName} has been registered.`,
+        });
 
         toast.success("Patient Added Successfully");
       }
@@ -110,7 +127,7 @@ const AddPatientModal = ({
         <div className="modal-header">
           <h2>{selectedPatient ? "Edit Patient" : "Add New Patient"}</h2>
 
-          <button className="close-btn" onClick={onClose}>
+          <button type="button" className="close-btn" onClick={onClose}>
             ✕
           </button>
         </div>

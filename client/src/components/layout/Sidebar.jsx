@@ -14,6 +14,7 @@ import { NavLink } from "react-router-dom";
 import "./Sidebar.css";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import { FaBullhorn } from "react-icons/fa";
 
 const Sidebar = () => {
   const menuItems = [
@@ -23,7 +24,11 @@ const Sidebar = () => {
     { name: "Appointments", icon: <FaCalendarCheck />, path: "/appointments" },
     { name: "Ward Management", icon: <FaBed />, path: "/wards" },
     { name: "Billing", icon: <FaFileInvoiceDollar />, path: "/billing" },
-    { name: "Settings", icon: <FaCog />, path: "/settings" },
+    {
+      name: "Announcements",
+      path: "/announcements",
+      icon: <FaBullhorn />,
+    },
   ];
   const navigate = useNavigate();
   const { logout } = useAuth();
@@ -63,14 +68,7 @@ const Sidebar = () => {
       {/* Footer */}
 
       <div className="sidebar-footer">
-        <div className="admin-card">
-          <div className="admin-avatar">A</div>
-
-          <div>
-            <h4>Administrator</h4>
-            <p>admin@hospital.com</p>
-          </div>
-        </div>
+        
 
         <button
           className="logout-btn"

@@ -1,9 +1,8 @@
 .modal-overlay {
-
     position: fixed;
     inset: 0;
 
-    background: rgba(15, 23, 42, .55);
+    background: rgba(15, 23, 42, 0.55);
 
     display: flex;
     justify-content: center;
@@ -13,114 +12,118 @@
 }
 
 .patient-modal {
+    position: relative;
 
     width: 650px;
     max-width: 95%;
+    max-height: 90vh;
 
-    background: white;
+    background: #fff;
 
     border-radius: 18px;
 
-    padding: 25px;
+    overflow-y: auto;
 
-    animation: popup .25s ease;
+    animation: popup 0.25s ease;
 }
 
 @keyframes popup {
-
     from {
-
         transform: scale(.9);
-
         opacity: 0;
-
     }
 
     to {
-
         transform: scale(1);
-
         opacity: 1;
-
     }
-
 }
 
 .modal-header {
+    position: sticky;
+    top: 0;
 
     display: flex;
-
     justify-content: space-between;
-
     align-items: center;
 
-    margin-bottom: 25px;
+    padding: 25px;
+
+    background: #fff;
+
+    border-bottom: 1px solid #E5E7EB;
+
+    z-index: 100;
 }
 
 .modal-header h2 {
-
+    margin: 0;
     color: #111827;
 }
 
 .close-btn {
-
-    width: 38px;
-
-    height: 38px;
+    width: 42px;
+    height: 42px;
 
     border: none;
-
     border-radius: 50%;
 
-    background: #F1F5F9;
+    background: #F3F4F6;
+    color: #374151;
+
+    font-size: 26px;
+    font-weight: 700;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     cursor: pointer;
 
-    font-size: 18px;
+    transition: all .25s ease;
+}
+
+.close-btn:hover {
+    background: #EF4444;
+    color: white;
+
+    transform: rotate(90deg);
 }
 
 .patient-form {
-
     display: flex;
-
     flex-direction: column;
 
     gap: 18px;
+
+    padding: 25px;
 }
 
 .form-row {
-
     display: grid;
-
     grid-template-columns: 1fr 1fr;
 
     gap: 18px;
 }
 
 .form-group {
-
     display: flex;
-
     flex-direction: column;
 
     gap: 8px;
 }
 
 .form-group label {
-
     font-weight: 600;
-
     color: #374151;
 }
 
 .form-group input,
 .form-group select,
 .form-group textarea {
-
     padding: 13px 15px;
 
     border: 1px solid #E5E7EB;
-
     border-radius: 10px;
 
     font-size: 15px;
@@ -133,14 +136,11 @@
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
-
     border-color: #2563EB;
 }
 
 .modal-footer {
-
     display: flex;
-
     justify-content: flex-end;
 
     gap: 15px;
@@ -149,11 +149,9 @@
 }
 
 .cancel-btn {
-
     padding: 12px 20px;
 
     border: 1px solid #CBD5E1;
-
     border-radius: 10px;
 
     background: white;
@@ -162,15 +160,12 @@
 }
 
 .save-btn {
-
     padding: 12px 20px;
 
     border: none;
-
     border-radius: 10px;
 
     background: #2563EB;
-
     color: white;
 
     cursor: pointer;
@@ -179,6 +174,5 @@
 }
 
 .save-btn:hover {
-
     background: #1D4ED8;
 }

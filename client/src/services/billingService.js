@@ -5,7 +5,7 @@ import api from "./axios";
 // ===============================
 export const getBills = async () => {
   const response = await api.get("/billing");
-  return response.data;
+  return response.data.bills;
 };
 
 // ===============================

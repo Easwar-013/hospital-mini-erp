@@ -1,39 +1,65 @@
+.dashboard-box {
+    background: #fff;
+    border-radius: 20px;
+    padding: 28px;
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+}
+
+.dashboard-box h3 {
+    margin-bottom: 22px;
+    font-size: 32px;
+    font-weight: 700;
+    color: #111827;
+}
+
 .quick-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
+    gap: 20px;
 }
 
-.quick-btn {
-    border: none;
-    background: #F8FAFC;
-    border: 1px solid #E5E7EB;
-    border-radius: 14px;
-    padding: 20px;
-    cursor: pointer;
-    transition: .3s;
+.quick-card {
+    background: #f8fafc;
+    border: 1px solid #e5e7eb;
+    border-radius: 18px;
+
+    height: 120px;
 
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-    gap: 12px;
+
+    cursor: pointer;
+
+    transition: all .3s ease;
 }
 
-.quick-btn svg {
-    font-size: 28px;
-    color: #2563EB;
+.quick-card svg {
+    font-size: 34px;
+    color: #2563eb;
+    margin-bottom: 14px;
 }
 
-.quick-btn span {
-    font-size: 14px;
+.quick-card span {
+    font-size: 24px;
     font-weight: 600;
+    color: #111827;
 }
 
-.quick-btn:hover {
-    background: #2563EB;
-    color: white;
+.quick-card:hover {
+    background: #2563eb;
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(37, 99, 235, .25);
 }
 
-.quick-btn:hover svg {
-    color: white;
+.quick-card:hover svg,
+.quick-card:hover span {
+    color: #fff;
+}
+
+@media (max-width:768px) {
+    .quick-grid {
+        grid-template-columns: 1fr;
+    }
 }

@@ -6,18 +6,19 @@ import "./Appointments.css";
 
 import AppointmentTable from "../../components/appointments/AppointmentTable";
 import AddAppointmentModal from "../../components/appointments/AddAppointmentModal";
-
+import { useSearchParams } from "react-router-dom";
 import { getAppointments } from "../../services/appointmentService";
 
 const Appointments = () => {
   const [appointments, setAppointments] = useState([]);
   const [openModal, setOpenModal] = useState(false);
   const [selectedAppointment, setSelectedAppointment] = useState(null);
+  const [searchParams] = useSearchParams();
 
   const fetchAppointments = async () => {
     try {
       const data = await getAppointments();
-      setAppointments(data.appointments);
+      setAppointments(data);
     } catch (error) {
       toast.error("Failed to load appointments");
     }
@@ -25,6 +26,11 @@ const Appointments = () => {
 
   useEffect(() => {
     fetchAppointments();
+
+    if (searchParams.get("add") === "true") {
+      setSelectedAppointment(null);
+      setOpenModal(true);
+    }
   }, []);
 
   return (
