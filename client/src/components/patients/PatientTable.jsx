@@ -63,61 +63,67 @@ const PatientTable = ({ patients = [], onEdit, onDelete }) => {
               <th>Phone</th>
               <th>Doctor</th>
               <th>Status</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {filteredPatients.length === 0 ? (
-            <tr>
-              <td colSpan="8" style={{ textAlign: "center" }}>
-                No Patients Found
-              </td>
+              <th>Action</th>
             </tr>
-          ) : (
-            filteredPatients.map((patient) => (
-              <tr key={patient._id}>
-                <td>{patient.patientId}</td>
+          </thead>
 
-                <td>{patient.fullName}</td>
-
-                <td>{patient.age}</td>
-
-                <td>{patient.gender}</td>
-
-                <td>{patient.phone}</td>
-
-                <td>{patient.doctor?.fullName || "-"}</td>
-
-                <td>
-                  <span
-                    className={
-                      patient.status === "Admitted"
-                        ? "status admitted"
-                        : "status discharged"
-                    }
-                  >
-                    {patient.status}
-                  </span>
-                </td>
-
-                <td>
-                  <button className="edit" onClick={() => onEdit(patient)}>
-                    <FaEdit />
-                  </button>
-
-                  <button
-                    className="delete"
-                    onClick={() => handleDelete(patient._id)}
-                  >
-                    <FaTrash />
-                  </button>
+          <tbody>
+            {filteredPatients.length === 0 ? (
+              <tr>
+                <td colSpan="8" style={{ textAlign: "center" }}>
+                  No Patients Found
                 </td>
               </tr>
-            ))
-          )}
-        </tbody>
-      </table>
+            ) : (
+              filteredPatients.map((patient) => (
+                <tr key={patient._id}>
+                  <td>{patient.patientId}</td>
+
+                  <td>{patient.fullName}</td>
+
+                  <td>{patient.age}</td>
+
+                  <td>{patient.gender}</td>
+
+                  <td>{patient.phone}</td>
+
+                  {/* Smart check: If it's an object, grab fullName. If it's a string (like "Not Assigned" or a typed name), just show the string. Otherwise, show "-" */}
+                  <td>
+                    {patient.doctor?.fullName ||
+                      (typeof patient.doctor === "string"
+                        ? patient.doctor
+                        : "-")}
+                  </td>
+
+                  <td>
+                    <span
+                      className={
+                        patient.status === "Admitted"
+                          ? "status admitted"
+                          : "status discharged"
+                      }
+                    >
+                      {patient.status}
+                    </span>
+                  </td>
+
+                  <td>
+                    <button className="edit" onClick={() => onEdit(patient)}>
+                      <FaEdit />
+                    </button>
+
+                    <button
+                      className="delete"
+                      onClick={() => handleDelete(patient._id)}
+                    >
+                      <FaTrash />
+                    </button>
+                  </td>
+                </tr>
+              ))
+            )}
+          </tbody>
+        </table>
       </div>
     </div>
   );

@@ -35,11 +35,15 @@ export const createPatient = async (req, res) => {
 };
 
 // Get Patients
+// Get Patients
 export const getPatients = async (req, res) => {
   try {
-    const patients = await Patient.find().sort({
-      createdAt: -1,
-    });
+    // FIX: Added .populate("doctor", "fullName") to grab the doctor's name!
+    const patients = await Patient.find()
+      .populate("doctor", "fullName") 
+      .sort({
+        createdAt: -1,
+      });
 
     res.status(200).json({
       success: true,
@@ -47,12 +51,10 @@ export const getPatients = async (req, res) => {
     });
 
   } catch (error) {
-
     res.status(500).json({
       success: false,
       message: error.message,
     });
-
   }
 };
 
