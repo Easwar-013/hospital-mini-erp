@@ -1,4 +1,5 @@
 import Patient from "../models/Patient.js";
+import Doctor from "../models/Doctor.js";
 
 // Create Patient
 export const createPatient = async (req, res) => {
@@ -38,16 +39,34 @@ export const createPatient = async (req, res) => {
 // Get Patients
 export const getPatients = async (req, res) => {
   try {
-    // FIX: Added .populate("doctor", "fullName") to grab the doctor's name!
-    const patients = await Patient.find()
-      .populate("doctor", "fullName") 
-      .sort({
-        createdAt: -1,
-      });
+    // Fetch all patients and doctors as raw JSON objects using .lean()
+    const patients = await Patient.find().sort({ createdAt: -1 }).lean();
+    const doctors = await Doctor.find().lean();
+
+    // Manually attach the doctor's full name if the field is a Database ID
+    const updatedPatients = patients.map((patient) => {
+      // Check if the doctor field exists and looks like a MongoDB ID (24 characters)
+      if (patient.doctor && patient.doctor.toString().length === 24) {
+        
+        // Find the doctor that matches this ID
+        const matchedDoctor = doctors.find(
+          (doc) => doc._id.toString() === patient.doctor.toString()
+        );
+
+        if (matchedDoctor) {
+          // Replace the ID string with an object so your frontend table reads the fullName perfectly!
+          patient.doctor = {
+            _id: matchedDoctor._id,
+            fullName: matchedDoctor.fullName,
+          };
+        }
+      }
+      return patient;
+    });
 
     res.status(200).json({
       success: true,
-      patients,
+      patients: updatedPatients,
     });
 
   } catch (error) {
@@ -57,7 +76,6 @@ export const getPatients = async (req, res) => {
     });
   }
 };
-
 // Update Patient
 export const updatePatient = async (req, res) => {
   try {
