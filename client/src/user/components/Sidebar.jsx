@@ -56,10 +56,6 @@ const Sidebar = () => {
       {/* Bottom Buttons */}
 
       <div className="sidebar-footer">
-        <Link to="/login" className="admin-btn">
-          <FaUserShield />
-          Admin
-        </Link>
 
         <button className="logout-btn" onClick={logout}>
           <FaSignOutAlt />

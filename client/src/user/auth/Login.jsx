@@ -2,14 +2,13 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-import "./Register.css";
+import "./Login.css";
 
 import { loginUser } from "../services/userService";
 import { useUserAuth } from "../context/UserAuthContext";
 
 const Login = () => {
   const navigate = useNavigate();
-
   const { login } = useUserAuth();
 
   const [formData, setFormData] = useState({
@@ -35,7 +34,11 @@ const Login = () => {
     try {
       const data = await loginUser(formData);
 
+      // 1. Pass the token to your Auth Context
       login(data.token);
+
+      // 2. ADD THIS LINE: Save the user data to localStorage so the Navbar can read it!
+      localStorage.setItem("user", JSON.stringify(data.user));
 
       toast.success("Login Successful");
 
@@ -46,44 +49,73 @@ const Login = () => {
   };
 
   return (
-    <div className="auth-container">
-      <div className="auth-card">
-        <h1>🏥 CITY HOSPITAL</h1>
+    <div className="login-container">
+      {/* LEFT PANEL */}
+      <div className="login-left">
+        <div className="left-content">
+          <h1>🏥 CITY HOSPITAL</h1>
 
-        <h2>Patient Login</h2>
+          <h2>Patient Portal</h2>
 
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label>Email</label>
+          <p>
+            Book appointments, manage your medical records, download bills and
+            access healthcare services from anywhere.
+          </p>
+        </div>
+      </div>
 
-            <input
-              type="email"
-              name="email"
-              placeholder="Enter Email"
-              value={formData.email}
-              onChange={handleChange}
-            />
+      {/* RIGHT PANEL */}
+      {/* RIGHT PANEL */}
+
+      <div className="login-right">
+        <div className="right-content">
+          {/* Top Header */}
+          <div className="top-nav">
+            <span className="admin-text">Hospital Staff?</span>
+
+            <button className="admin-btn" onClick={() => navigate("/login")}>
+              Admin Login
+            </button>
           </div>
 
-          <div className="form-group">
-            <label>Password</label>
+          {/* Login Card */}
+          <div className="login-card">
+            <div className="hospital-icon">🏥</div>
 
-            <input
-              type="password"
-              name="password"
-              placeholder="********"
-              value={formData.password}
-              onChange={handleChange}
-            />
+            <h2>Welcome Back</h2>
+
+            <p className="subtitle">Sign in to continue</p>
+
+            <form onSubmit={handleSubmit}>
+              <label>Email</label>
+
+              <input
+                type="email"
+                name="email"
+                placeholder="Enter Email"
+                value={formData.email}
+                onChange={handleChange}
+              />
+
+              <label>Password</label>
+
+              <input
+                type="password"
+                name="password"
+                placeholder="Enter Password"
+                value={formData.password}
+                onChange={handleChange}
+              />
+
+              <button className="login-btn">Login</button>
+            </form>
+
+            <p className="register-text">
+              Don't have an account?
+              <Link to="/user/register"> Register</Link>
+            </p>
           </div>
-
-          <button className="auth-btn">Login</button>
-        </form>
-
-        <p className="auth-footer">
-          Don't have an account?
-          <Link to="/user/register"> Register</Link>
-        </p>
+        </div>
       </div>
     </div>
   );

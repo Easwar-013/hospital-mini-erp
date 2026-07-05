@@ -69,11 +69,11 @@ export const bookAppointment = async (req, res) => {
 // ==========================
 export const getMyAppointments = async (req, res) => {
   try {
-
     console.log("Logged User:", req.user);
 
+    // FIX: Search by the patient's medical record ID, not the login user ID!
     const appointments = await Appointment.find({
-      user: req.user._id,
+      patient: req.user.patient, 
     })
       .populate("doctor", "fullName specialization")
       .sort({ createdAt: -1 });
@@ -84,10 +84,8 @@ export const getMyAppointments = async (req, res) => {
       success: true,
       appointments,
     });
-
   } catch (error) {
     console.log(error);
-
     res.status(500).json({
       success: false,
       message: error.message,

@@ -1,0 +1,349 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Segoe UI, Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* MAIN */
+
+.login-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* LEFT */
+
+.login-left {
+    flex: 1.6;
+    background: linear-gradient(135deg, #2563eb, #1e3a8a);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 80px;
+    color: white;
+}
+
+.left-content {
+    max-width: 620px;
+}
+
+.left-content h1 {
+    font-size: 64px;
+    font-weight: 700;
+    margin-bottom: 25px;
+}
+
+.left-content h2 {
+    font-size: 40px;
+    margin-bottom: 25px;
+    font-weight: 500;
+}
+
+.left-content p {
+    font-size: 24px;
+    line-height: 1.8;
+    opacity: .95;
+}
+
+/* RIGHT */
+
+.login-right {
+    flex: 1;
+    background: #f8fafc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    position: relative;
+}
+
+/* Added structure to align contents on desktop */
+.right-content {
+    width: 100%;
+    max-width: 450px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Positions the nav items horizontally and pushes them to the right side */
+.top-nav {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.admin-text {
+    white-space: nowrap;
+    color: #64748b;
+    font-size: 14px;
+}
+
+.admin-btn {
+    white-space: nowrap;
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.admin-btn:hover {
+    background: #1d4ed8;
+}
+
+/* CARD */
+
+.login-card {
+    width: 100%;
+    background: white;
+    border-radius: 25px;
+    padding: 45px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, .08);
+}
+
+.hospital-icon {
+    width: 90px;
+    height: 90px;
+    background: #2563eb;
+    border-radius: 22px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    color: white;
+    font-size: 42px;
+    margin-bottom: 25px;
+}
+
+.login-card h2 {
+    text-align: center;
+    font-size: 42px;
+    color: #1e293b;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #64748b;
+    margin-bottom: 35px;
+    display: block;
+}
+
+.login-card label {
+    display: block;
+    margin-bottom: 8px;
+    margin-top: 18px;
+    font-weight: 600;
+    color: #334155;
+}
+
+.login-card input {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    font-size: 16px;
+    transition: .3s;
+}
+
+.login-card input:focus {
+    border-color: #2563eb;
+    outline: none;
+}
+
+.login-btn {
+    width: 100%;
+    margin-top: 30px;
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.login-btn:hover {
+    background: #1d4ed8;
+}
+
+.register-text {
+    margin-top: 28px;
+    text-align: center;
+    font-size: 15px;
+}
+
+.register-text a {
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: 600;
+    margin-left: 5px;
+}
+
+/* MOBILE */
+
+@media(max-width:1000px) {
+    .login-container {
+        flex-direction: column;
+    }
+
+    .login-left {
+        padding: 60px 30px;
+    }
+
+    .left-content h1 {
+        font-size: 42px;
+    }
+
+    .left-content h2 {
+        font-size: 30px;
+    }
+
+    .left-content p {
+        font-size: 18px;
+    }
+
+    .login-right {
+        flex: 1;
+        background: #f8fafc;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 50px;
+    }
+
+    .right-content {
+        width: 100%;
+        max-width: 620px;
+    }
+
+    .top-nav {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 25px;
+    }
+
+    .admin-text {
+        white-space: nowrap;
+    }
+}
+
+/* ==========================
+   MOBILE RESPONSIVE
+========================== */
+
+@media screen and (max-width: 992px) {
+
+    .login-container {
+        flex-direction: column;
+        min-height: auto;
+    }
+
+    .login-left {
+        width: 100%;
+        flex: none;
+        padding: 50px 25px;
+        text-align: center;
+    }
+
+    .left-content {
+        max-width: 100%;
+    }
+
+    .left-content h1 {
+        font-size: 42px;
+    }
+
+    .left-content h2 {
+        font-size: 30px;
+    }
+
+    .left-content p {
+        font-size: 18px;
+        line-height: 1.6;
+    }
+
+    .login-right {
+        width: 100%;
+        flex: none;
+        padding: 30px 20px 40px;
+    }
+
+    .right-content {
+        max-width: 100%;
+    }
+
+    .top-nav {
+        justify-content: center;
+        margin-bottom: 20px;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    .login-card {
+        max-width: 100%;
+        padding: 35px 25px;
+    }
+
+    .login-card h2 {
+        font-size: 34px;
+    }
+
+    .hospital-icon {
+        width: 75px;
+        height: 75px;
+        font-size: 34px;
+    }
+
+    .login-card input {
+        font-size: 15px;
+        padding: 14px;
+    }
+
+    .login-btn {
+        padding: 14px;
+    }
+}
+
+@media screen and (max-width:480px) {
+
+    .left-content h1 {
+        font-size: 34px;
+    }
+
+    .left-content h2 {
+        font-size: 26px;
+    }
+
+    .left-content p {
+        font-size: 16px;
+    }
+
+    .login-card {
+        padding: 28px 18px;
+    }
+
+    .login-card h2 {
+        font-size: 28px;
+    }
+
+    .admin-btn {
+        width: 100%;
+    }
+
+    .top-nav {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}

@@ -97,3 +97,54 @@
 .logout-btn:hover {
     background: #dc2626;
 }
+
+/* ===================================
+   MOBILE RESPONSIVENESS (Max-width: 768px)
+=================================== */
+@media screen and (max-width: 768px) {
+    .user-sidebar {
+        width: 100%;
+        min-height: auto; /* Removes the 100vh height */
+        position: relative;
+    }
+
+    /* Reduce logo size to save space */
+    .user-logo {
+        padding: 15px;
+    }
+    
+    .user-logo h2 {
+        font-size: 20px;
+    }
+
+    /* Turn the vertical links into a scrollable horizontal row */
+    .user-sidebar nav {
+        flex-direction: row;
+        margin-top: 0;
+        padding: 0 10px 10px 10px;
+        overflow-x: auto; /* Allows users to swipe left/right if there are many links */
+        gap: 5px;
+    }
+
+    .user-sidebar nav a {
+        padding: 10px 15px;
+        border-radius: 8px; /* Makes them look like pills/buttons */
+        white-space: nowrap; /* Prevents text from breaking into two lines */
+    }
+
+    /* Put the footer buttons side-by-side */
+    .sidebar-footer {
+        flex-direction: row;
+        padding: 15px;
+        gap: 10px;
+        margin-top: 0;
+        border-top: 1px solid #1e293b;
+    }
+
+    .admin-btn, 
+    .logout-btn {
+        flex: 1; /* Makes both buttons take up exactly 50% of the width */
+        padding: 10px;
+        font-size: 14px;
+    }
+}

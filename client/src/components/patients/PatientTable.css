@@ -96,3 +96,37 @@
     color: #EF4444;
 
 }
+/* ===========================
+   Responsive Table
+=========================== */
+
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.table-responsive table {
+    min-width: 1000px;
+}
+
+@media (max-width:768px) {
+
+    .patient-table {
+        padding: 15px;
+    }
+
+    .table-header {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .search-box {
+        width: 100%;
+    }
+
+    .search-box input {
+        width: 100%;
+    }
+
+}

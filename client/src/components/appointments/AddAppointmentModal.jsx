@@ -16,6 +16,7 @@ import "./AddAppointmentModal.css";
 const initialFormData = {
   patient: "",
   doctor: "",
+  department: "",
   appointmentDate: "",
   appointmentTime: "",
   status: "Scheduled",
@@ -78,6 +79,7 @@ const AddAppointmentModal = ({
   const doctorOptions = (doctors || []).map((doctor) => ({
     value: doctor._id,
     label: `${doctor.fullName} - ${doctor.specialization}`,
+    department: doctor.department || doctor.specialization,
   }));
 
   const handleSubmit = async (e) => {
@@ -94,9 +96,19 @@ const AddAppointmentModal = ({
     }
 
     try {
+      // Grab the logged-in user from localStorage
+      const currentUser = JSON.parse(localStorage.getItem("user"));
+
+      // Create a complete payload with the required user ID attached
+      const payloadToSubmit = {
+        ...formData,
+        user: currentUser?._id || currentUser?.id,
+      };
+
       if (selectedAppointment) {
-        console.log("Submitting formData:", formData);
-        await updateAppointment(selectedAppointment._id, formData);
+        console.log("Submitting formData:", payloadToSubmit);
+        // Pass the new payload here
+        await updateAppointment(selectedAppointment._id, payloadToSubmit);
 
         addNotification({
           icon: "📅",
@@ -106,7 +118,8 @@ const AddAppointmentModal = ({
 
         toast.success("Appointment Updated Successfully");
       } else {
-        await addAppointment(formData);
+        // Pass the new payload here
+        await addAppointment(payloadToSubmit);
 
         addNotification({
           icon: "📅",
@@ -118,9 +131,7 @@ const AddAppointmentModal = ({
       }
 
       setFormData(initialFormData);
-
       onAppointmentSaved();
-
       onClose();
     } catch (error) {
       toast.error(error.response?.data?.message || "Operation Failed");
@@ -185,6 +196,7 @@ const AddAppointmentModal = ({
                 setFormData({
                   ...formData,
                   doctor: selected ? selected.value : "",
+                  department: selected ? selected.department : "",
                 })
               }
               isSearchable

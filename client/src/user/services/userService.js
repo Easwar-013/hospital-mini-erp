@@ -51,5 +51,6 @@ export const getMyAppointments = async () => {
     }
   );
 
-  return response.data;
+  // FIX: Drill down one more level to return just the array!
+  return response.data.appointments; 
 };

@@ -1,0 +1,37 @@
+.user-layout-wrapper {
+    display: flex;
+    min-height: 100vh;
+    background: #f5f7fb;
+}
+
+.user-layout-main {
+    flex: 1;
+    /* This is the magic line! It fills the space perfectly without a margin gap */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.user-layout-content {
+    padding: 25px;
+    flex: 1;
+    max-width: 1440px;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* ===================================
+   MOBILE VIEW STACKING
+=================================== */
+@media screen and (max-width: 768px) {
+    .user-layout-wrapper {
+        flex-direction: column !important;
+    }
+
+    .user-layout-content {
+        padding: 15px;
+    }
+}

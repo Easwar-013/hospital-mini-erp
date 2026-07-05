@@ -148,3 +148,55 @@ th {
 
     border-radius: 10px;
 }
+
+/* ===================================
+   MOBILE & TABLET RESPONSIVE RULES
+=================================== */
+
+/* Tablet View (Screens smaller than 1024px) */
+@media screen and (max-width: 1024px) {
+    .card-grid {
+        grid-template-columns: repeat(2, 1fr);
+        /* 2x2 grid for stats */
+    }
+
+    .dashboard-row {
+        grid-template-columns: 1fr;
+        /* Stacks the row sections vertically */
+    }
+}
+
+/* Mobile View (Screens smaller than 768px) */
+@media screen and (max-width: 768px) {
+    .welcome-banner {
+        padding: 25px 20px;
+        border-radius: 16px;
+    }
+
+    .welcome-banner h1 {
+        font-size: 24px;
+    }
+
+    .welcome-banner p {
+        width: 100%;
+        /* Allows text to take full width instead of 70% */
+        font-size: 14px;
+    }
+
+    .card-grid {
+        grid-template-columns: 1fr;
+        /* Stacks all stat cards in 1 single column */
+        gap: 15px;
+    }
+
+    .dashboard-box {
+        padding: 20px 15px;
+    }
+
+    /* Makes the table horizontally scrollable if data gets too wide */
+    .dashboard-box table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+}

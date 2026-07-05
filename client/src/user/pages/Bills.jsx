@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { getMyBills } from "../services/appointmentService";
 import "./Bills.css";
+import axios from "axios";
 
 const Bills = () => {
   const [bills, setBills] = useState([]);
@@ -9,6 +10,56 @@ const Bills = () => {
   useEffect(() => {
     fetchBills();
   }, []);
+
+  const previewInvoice = async (id) => {
+    const token = localStorage.getItem("patientToken");
+
+    const response = await axios.get(
+      `http://localhost:5000/api/patient-user/bill/${id}/pdf`,
+      {
+        responseType: "blob",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
+
+    const file = new Blob([response.data], {
+      type: "application/pdf",
+    });
+
+    const url = URL.createObjectURL(file);
+
+    window.open(url);
+  };
+
+  const downloadInvoice = async (id) => {
+    const token = localStorage.getItem("patientToken");
+
+    const response = await axios.get(
+      `http://localhost:5000/api/patient-user/bill/${id}/pdf`,
+      {
+        responseType: "blob",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
+
+    const url = URL.createObjectURL(new Blob([response.data]));
+
+    const link = document.createElement("a");
+
+    link.href = url;
+
+    link.download = "Invoice.pdf";
+
+    document.body.appendChild(link);
+
+    link.click();
+
+    link.remove();
+  };
 
   const fetchBills = async () => {
     try {
@@ -43,6 +94,7 @@ const Bills = () => {
               <th>Total</th>
               <th>Payment</th>
               <th>Status</th>
+              <th>pdf</th>
             </tr>
           </thead>
 
@@ -58,6 +110,22 @@ const Bills = () => {
                 <td>{bill.paymentMethod}</td>
 
                 <td>{bill.paymentStatus}</td>
+
+                <td>
+                  <button
+                    className="preview-btn"
+                    onClick={() => previewInvoice(bill._id)}
+                  >
+                    👁 Preview
+                  </button>
+
+                  <button
+                    className="download-btn"
+                    onClick={() => downloadInvoice(bill._id)}
+                  >
+                    ⬇ Download
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>

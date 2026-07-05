@@ -3,19 +3,28 @@ import "./NotificationDropdown.css";
 const NotificationDropdown = ({ notifications }) => {
   return (
     <div className="notification-dropdown">
-      <h4>Notifications</h4>
+      <div className="notification-header">
+        <h4>Notifications</h4>
+        <span>{notifications.length}</span>
+      </div>
 
-      {notifications.length === 0 ? (
-        <p className="empty">No Notifications</p>
-      ) : (
-        notifications.map((item, index) => (
-          <div className="notification-item" key={index}>
-            <span>{item.icon}</span>
+      <div className="notification-list">
+        {notifications.length === 0 ? (
+          <p className="empty">No Notifications</p>
+        ) : (
+          notifications.map((item, index) => (
+            <div className="notification-item" key={index}>
+              <div className="notification-icon">{item.icon}</div>
 
-            <p>{item.message}</p>
-          </div>
-        ))
-      )}
+              <div className="notification-content">
+                {item.title && <h5>{item.title}</h5>}
+
+                <p>{item.message}</p>
+              </div>
+            </div>
+          ))
+        )}
+      </div>
     </div>
   );
 };

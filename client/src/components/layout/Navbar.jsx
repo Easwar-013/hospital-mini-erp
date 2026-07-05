@@ -1,8 +1,8 @@
 import "./Navbar.css";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 
-import { FaBell, FaSearch, FaChevronDown } from "react-icons/fa";
+import { FaBell, FaSearch } from "react-icons/fa";
 
 import SearchDropdown from "../search/SearchDropdown";
 import { globalSearch } from "../../services/searchService";
@@ -12,13 +12,16 @@ import { getNotifications } from "../../services/notificationService";
 
 const Navbar = () => {
   const location = useLocation();
-  const navigate = useNavigate();
 
   const [search, setSearch] = useState("");
   const [results, setResults] = useState([]);
   const [allData, setAllData] = useState([]);
+
   const [notifications, setNotifications] = useState([]);
   const [openNotifications, setOpenNotifications] = useState(false);
+
+  // NEW
+  const [unreadCount, setUnreadCount] = useState(0);
 
   const pageTitles = {
     "/dashboard": "Dashboard",
@@ -39,7 +42,7 @@ const Navbar = () => {
     year: "numeric",
   });
 
-  // Load all searchable data once
+  // Search
   useEffect(() => {
     const load = async () => {
       try {
@@ -53,13 +56,11 @@ const Navbar = () => {
     load();
   }, []);
 
-  // Live Search
   useEffect(() => {
     if (!search.trim()) {
       setResults([]);
       return;
     }
-  
 
     const keyword = search.toLowerCase();
 
@@ -72,19 +73,32 @@ const Navbar = () => {
     setResults(filtered);
   }, [search, allData]);
 
+  // Notifications
   useEffect(() => {
     const load = async () => {
       try {
         const data = await getNotifications();
+
         setNotifications(data || []);
+
+        // Badge Count
+        setUnreadCount(data?.length || 0);
       } catch (err) {
         console.log(err);
-        setNotifications([]);
       }
     };
 
     load();
   }, []);
+
+  const handleNotificationClick = () => {
+    setOpenNotifications(!openNotifications);
+
+    // Hide badge after opening
+    if (!openNotifications) {
+      setUnreadCount(0);
+    }
+  };
 
   return (
     <header className="navbar">
@@ -120,19 +134,19 @@ const Navbar = () => {
         <div style={{ position: "relative" }}>
           <button
             className="notification-btn"
-            onClick={() => setOpenNotifications(!openNotifications)}
+            onClick={handleNotificationClick}
           >
             <FaBell />
 
-            <span className="notification-count">{notifications.length}</span>
+            {unreadCount > 0 && (
+              <span className="notification-count">{unreadCount}</span>
+            )}
           </button>
 
           {openNotifications && (
             <NotificationDropdown notifications={notifications} />
           )}
         </div>
-
-        
       </div>
     </header>
   );

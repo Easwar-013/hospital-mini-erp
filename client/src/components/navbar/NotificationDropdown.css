@@ -1,37 +1,176 @@
 .notification-dropdown {
+
     position: absolute;
     top: 60px;
     right: 0;
-    width: 320px;
+
+    width: 380px;
+
     background: white;
-    border-radius: 14px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, .12);
-    z-index: 1000;
+
+    border-radius: 18px;
+
+    box-shadow: 0 12px 35px rgba(0, 0, 0, .15);
+
     overflow: hidden;
+
+    z-index: 1000;
 }
 
-.notification-dropdown h4 {
-    padding: 15px;
+/* Header */
+
+.notification-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 18px 22px;
+
     border-bottom: 1px solid #eee;
+
+    background: #fff;
 }
+
+.notification-header h4 {
+
+    font-size: 20px;
+
+    color: #1e293b;
+}
+
+.notification-header span {
+
+    background: #2563eb;
+
+    color: white;
+
+    width: 28px;
+
+    height: 28px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    font-size: 13px;
+
+    font-weight: bold;
+}
+
+/* Scroll Area */
+
+.notification-list {
+
+    max-height: 450px;
+
+    overflow-y: auto;
+}
+
+/* Scrollbar */
+
+.notification-list::-webkit-scrollbar {
+
+    width: 6px;
+}
+
+.notification-list::-webkit-scrollbar-thumb {
+
+    background: #2563eb;
+
+    border-radius: 20px;
+}
+
+.notification-list::-webkit-scrollbar-track {
+
+    background: #f5f5f5;
+}
+
+/* Notification */
 
 .notification-item {
+
     display: flex;
-    gap: 12px;
-    padding: 15px;
+
+    gap: 15px;
+
+    align-items: flex-start;
+
+    padding: 18px 20px;
+
     cursor: pointer;
+
+    transition: .25s;
+
+    border-bottom: 1px solid #f1f1f1;
 }
 
 .notification-item:hover {
-    background: #f8fafc;
+
+    background: #f8fbff;
 }
 
-.notification-item span {
-    font-size: 22px;
+/* Icon */
+
+.notification-icon {
+
+    width: 48px;
+
+    height: 48px;
+
+    border-radius: 12px;
+
+    background: #eef4ff;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    font-size: 24px;
+
+    flex-shrink: 0;
+}
+
+/* Content */
+
+.notification-content {
+
+    flex: 1;
+}
+
+.notification-content h5 {
+
+    margin: 0;
+
+    font-size: 15px;
+
+    color: #0f172a;
+}
+
+.notification-content p {
+
+    margin-top: 5px;
+
+    color: #64748b;
+
+    font-size: 14px;
+
+    line-height: 1.5;
 }
 
 .empty {
-    padding: 20px;
+
     text-align: center;
-    color: #888;
+
+    padding: 50px;
+
+    color: #94a3b8;
 }

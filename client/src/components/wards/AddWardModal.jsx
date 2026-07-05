@@ -95,21 +95,9 @@ const AddWardModal = ({ isOpen, onClose, selectedWard, onWardSaved }) => {
       if (selectedWard) {
         await updateWard(selectedWard._id, formData);
 
-        addNotification({
-          icon: "🛏️",
-          title: "Ward Updated",
-          message: "Ward assignment has been updated.",
-        });
-
         toast.success("Ward Updated Successfully");
       } else {
         await addWard(formData);
-
-        addNotification({
-          icon: "🛏️",
-          title: "Ward Assigned",
-          message: "A patient has been assigned to a ward.",
-        });
 
         toast.success("Ward Assigned Successfully");
       }
@@ -120,7 +108,13 @@ const AddWardModal = ({ isOpen, onClose, selectedWard, onWardSaved }) => {
 
       setFormData(initialFormData);
     } catch (error) {
-      toast.error(error.response?.data?.message || "Operation Failed");
+      console.log(error);
+      console.log(error.response);
+      console.log(error.request);
+
+      toast.error(
+        error.response?.data?.message || error.message || "Operation Failed",
+      );
     }
   };
 

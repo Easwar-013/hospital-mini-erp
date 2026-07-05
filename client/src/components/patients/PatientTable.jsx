@@ -52,16 +52,17 @@ const PatientTable = ({ patients = [], onEdit, onDelete }) => {
         </div>
       </div>
 
-      <table>
-        <thead>
-          <tr>
-            <th>Patient ID</th>
-            <th>Name</th>
-            <th>Age</th>
-            <th>Gender</th>
-            <th>Phone</th>
-            <th>Doctor</th>
-            <th>Status</th>
+      <div className="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>Patient ID</th>
+              <th>Name</th>
+              <th>Age</th>
+              <th>Gender</th>
+              <th>Phone</th>
+              <th>Doctor</th>
+              <th>Status</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -117,6 +118,7 @@ const PatientTable = ({ patients = [], onEdit, onDelete }) => {
           )}
         </tbody>
       </table>
+      </div>
     </div>
   );
 };

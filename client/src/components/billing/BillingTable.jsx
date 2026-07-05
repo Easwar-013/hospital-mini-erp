@@ -52,71 +52,76 @@ const BillingTable = ({ bills, onEdit, onDelete, onPreview }) => {
         </div>
       </div>
 
-      <table>
-        <thead>
-          <tr>
-            <th>Bill ID</th>
-            <th>Patient</th>
-            <th>Doctor</th>
-            <th>Total</th>
-            <th>Status</th>
-            <th>Payment</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {filteredBills.length === 0 ? (
+      {/* Responsive Wrapper */}
+      <div className="table-responsive">
+        <table>
+          <thead>
             <tr>
-              <td colSpan="7" style={{ textAlign: "center" }}>
-                No Bills Found
-              </td>
+              <th>Bill ID</th>
+              <th>Patient</th>
+              <th>Doctor</th>
+              <th>Total</th>
+              <th>Status</th>
+              <th>Payment</th>
+              <th>Action</th>
             </tr>
-          ) : (
-            filteredBills.map((bill, index) => (
-              <tr key={bill._id}>
-                <td>
-                  INV
-                  {String(index + 1).padStart(4, "0")}
-                </td>
+          </thead>
 
-                <td>{bill.patient?.fullName}</td>
-
-                <td>{bill.doctor?.fullName}</td>
-
-                <td>₹ {bill.totalAmount}</td>
-
-                <td>
-                  <span className="status admitted">{bill.paymentStatus}</span>
-                </td>
-
-                <td>{bill.paymentMethod}</td>
-
-                <td>
-                  <button className="edit" onClick={() => onEdit(bill)}>
-                    <FaEdit />
-                  </button>
-
-                  <button
-                    className="delete"
-                    onClick={() => handleDelete(bill._id)}
-                  >
-                    <FaTrash />
-                  </button>
-
-                  <button
-                    className="pdf"
-                    title="Preview Invoice"
-                    onClick={() => onPreview(bill)}
-                  >
-                    <FaFilePdf />
-                  </button>
+          <tbody>
+            {filteredBills.length === 0 ? (
+              <tr>
+                <td colSpan="7" style={{ textAlign: "center" }}>
+                  No Bills Found
                 </td>
               </tr>
-            ))
-          )}
-        </tbody>
-      </table>
+            ) : (
+              filteredBills.map((bill, index) => (
+                <tr key={bill._id}>
+                  <td>
+                    INV
+                    {String(index + 1).padStart(4, "0")}
+                  </td>
+
+                  <td>{bill.patient?.fullName}</td>
+
+                  <td>{bill.doctor?.fullName}</td>
+
+                  <td>₹ {bill.totalAmount}</td>
+
+                  <td>
+                    <span className="status admitted">
+                      {bill.paymentStatus}
+                    </span>
+                  </td>
+
+                  <td>{bill.paymentMethod}</td>
+
+                  <td>
+                    <button className="edit" onClick={() => onEdit(bill)}>
+                      <FaEdit />
+                    </button>
+
+                    <button
+                      className="delete"
+                      onClick={() => handleDelete(bill._id)}
+                    >
+                      <FaTrash />
+                    </button>
+
+                    <button
+                      className="pdf"
+                      title="Preview Invoice"
+                      onClick={() => onPreview(bill)}
+                    >
+                      <FaFilePdf />
+                    </button>
+                  </td>
+                </tr>
+              ))
+            )}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

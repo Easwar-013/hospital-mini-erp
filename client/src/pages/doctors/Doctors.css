@@ -63,3 +63,12 @@
     background: #1D4ED8;
 
 }
+
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    min-width: 700px;
+}

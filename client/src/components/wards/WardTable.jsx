@@ -54,70 +54,73 @@ const WardTable = ({ wards, onEdit, onDelete }) => {
         </div>
       </div>
 
-      <table>
-        <thead>
-          <tr>
-            <th>Patient</th>
-            <th>Doctor</th>
-            <th>Ward</th>
-            <th>Bed</th>
-            <th>Admission Date</th>
-            <th>Status</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {filteredWards.length === 0 ? (
+      {/* Responsive Wrapper */}
+      <div className="table-responsive">
+        <table>
+          <thead>
             <tr>
-              <td colSpan="7" style={{ textAlign: "center" }}>
-                No Ward Assignments Found
-              </td>
+              <th>Patient</th>
+              <th>Doctor</th>
+              <th>Ward</th>
+              <th>Bed</th>
+              <th>Admission Date</th>
+              <th>Status</th>
+              <th>Action</th>
             </tr>
-          ) : (
-            filteredWards.map((ward) => (
-              <tr key={ward._id}>
-                <td>{ward.patient?.fullName}</td>
+          </thead>
 
-                <td>{ward.doctor?.fullName}</td>
-
-                <td>{ward.wardName}</td>
-
-                <td>{ward.bedNumber}</td>
-
-                <td>{ward.admissionDate}</td>
-
-                <td>
-                  <span
-                    className={
-                      ward.status === "Occupied"
-                        ? "status admitted"
-                        : ward.status === "Available"
-                          ? "status discharged"
-                          : "status pending"
-                    }
-                  >
-                    {ward.status}
-                  </span>
-                </td>
-
-                <td>
-                  <button className="edit" onClick={() => onEdit(ward)}>
-                    <FaEdit />
-                  </button>
-
-                  <button
-                    className="delete"
-                    onClick={() => handleDelete(ward._id)}
-                  >
-                    <FaTrash />
-                  </button>
+          <tbody>
+            {filteredWards.length === 0 ? (
+              <tr>
+                <td colSpan="7" style={{ textAlign: "center" }}>
+                  No Ward Assignments Found
                 </td>
               </tr>
-            ))
-          )}
-        </tbody>
-      </table>
+            ) : (
+              filteredWards.map((ward) => (
+                <tr key={ward._id}>
+                  <td>{ward.patient?.fullName}</td>
+
+                  <td>{ward.doctor?.fullName}</td>
+
+                  <td>{ward.wardName}</td>
+
+                  <td>{ward.bedNumber}</td>
+
+                  <td>{ward.admissionDate}</td>
+
+                  <td>
+                    <span
+                      className={
+                        ward.status === "Occupied"
+                          ? "status admitted"
+                          : ward.status === "Available"
+                            ? "status discharged"
+                            : "status pending"
+                      }
+                    >
+                      {ward.status}
+                    </span>
+                  </td>
+
+                  <td>
+                    <button className="edit" onClick={() => onEdit(ward)}>
+                      <FaEdit />
+                    </button>
+
+                    <button
+                      className="delete"
+                      onClick={() => handleDelete(ward._id)}
+                    >
+                      <FaTrash />
+                    </button>
+                  </td>
+                </tr>
+              ))
+            )}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

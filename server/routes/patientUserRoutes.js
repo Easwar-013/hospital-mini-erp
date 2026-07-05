@@ -14,7 +14,7 @@ import {
 
 import patientAuth from "../middleware/patientAuth.js";
 import { getPatientDashboard } from "../controllers/patientDashboardController.js";
-
+import { generateInvoicePDF } from "../controllers/pdfController.js";
 const router = express.Router();
 
 // Authentication
@@ -36,7 +36,11 @@ router.get(
 router.post("/book-appointment", patientAuth, bookAppointment);
 router.get("/my-appointments", patientAuth, getMyAppointments);
 
-
+router.get(
+  "/bill/:id/pdf",
+  patientAuth,
+  generateInvoicePDF
+);
 
 console.log("Patient User Routes Loaded");
 export default router;

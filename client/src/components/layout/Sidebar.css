@@ -14,6 +14,7 @@
     padding: 24px;
 
     box-shadow: 8px 0 25px rgba(0, 0, 0, .12);
+    z-index: 100;
 }
 
 /* Logo */
@@ -186,4 +187,121 @@
 .logout-btn:hover {
     background: #ef4444;
     color: white;
+}
+
+/* ===================================
+   TABLET RESPONSIVE
+=================================== */
+
+@media screen and (max-width:900px) {
+
+    .sidebar {
+        width: 80px;
+        padding: 18px 10px;
+        overflow-x: hidden;
+    }
+
+    .sidebar-logo {
+        justify-content: center;
+        margin-bottom: 30px;
+    }
+
+    .sidebar-logo div:last-child {
+        display: none;
+    }
+
+    .logo-circle {
+        width: 52px;
+        height: 52px;
+        font-size: 24px;
+    }
+
+    .sidebar-link {
+        justify-content: center;
+        padding: 16px 0;
+    }
+
+    .sidebar-link span {
+        display: none;
+    }
+
+    .sidebar-link svg {
+        font-size: 22px;
+    }
+
+    .sidebar-link.active::before {
+        left: 0;
+        width: 4px;
+        height: 24px;
+    }
+
+    .logout-btn {
+        padding: 12px;
+        font-size: 0;
+    }
+
+    .logout-btn svg {
+        font-size: 20px;
+    }
+}
+
+/* ===================================
+   MOBILE RESPONSIVE SIDEBAR
+=================================== */
+@media screen and (max-width: 768px) {
+    .sidebar {
+        width: 100% !important;
+        height: auto !important;
+        position: relative !important;
+        /* Un-fixes it from the left side */
+        padding: 15px !important;
+        display: block !important;
+    }
+
+    .sidebar-logo {
+        margin-bottom: 15px !important;
+        justify-content: flex-start !important;
+    }
+
+    /* Bring back the logo text that the tablet view hid */
+    .sidebar-logo div:last-child {
+        display: block !important;
+    }
+
+    /* Make links scroll horizontally instead of stacking */
+    .sidebar-menu {
+        flex-direction: row !important;
+        overflow-x: auto;
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+        gap: 10px;
+    }
+
+    .sidebar-link {
+        padding: 10px 15px !important;
+        white-space: nowrap;
+        /* Stops text from wrapping to the next line */
+        height: fit-content;
+    }
+
+    /* Bring back the link text that the tablet view hid */
+    .sidebar-link span {
+        display: inline !important;
+    }
+
+    /* Hide the vertical active indicator on mobile */
+    .sidebar-link.active::before {
+        display: none;
+    }
+
+    .sidebar-footer {
+        padding-top: 10px;
+        display: block;
+    }
+
+    /* Bring back logout text */
+    .logout-btn {
+        font-size: 14px !important;
+        padding: 10px !important;
+    }
 }

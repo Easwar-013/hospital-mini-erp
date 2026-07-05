@@ -53,63 +53,71 @@ const AppointmentTable = ({ appointments, onEdit, onDelete }) => {
         </div>
       </div>
 
-      <table>
-        <thead>
-          <tr>
-            <th>Appointment ID</th>
-            <th>Patient</th>
-            <th>Doctor</th>
-            <th>Date</th>
-            <th>Time</th>
-            <th>Status</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {filteredAppointments.length === 0 ? (
+      {/* Responsive Wrapper */}
+      <div className="table-responsive">
+        <table>
+          <thead>
             <tr>
-              <td colSpan="7" style={{ textAlign: "center" }}>
-                No Appointments Found
-              </td>
+              <th>Appointment ID</th>
+              <th>Patient</th>
+              <th>Doctor</th>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Status</th>
+              <th>Action</th>
             </tr>
-          ) : (
-            filteredAppointments.map((appointment, index) => (
-              <tr key={appointment._id}>
-                <td>
-                  APT
-                  {String(index + 1).padStart(3, "0")}
-                </td>
+          </thead>
 
-                <td>{appointment.patient?.fullName}</td>
-
-                <td>{appointment.doctor?.fullName}</td>
-
-                <td>{appointment.appointmentDate}</td>
-
-                <td>{appointment.appointmentTime}</td>
-
-                <td>
-                  <span className="status admitted">{appointment.status}</span>
-                </td>
-
-                <td>
-                  <button className="edit" onClick={() => onEdit(appointment)}>
-                    <FaEdit />
-                  </button>
-
-                  <button
-                    className="delete"
-                    onClick={() => handleDelete(appointment._id)}
-                  >
-                    <FaTrash />
-                  </button>
+          <tbody>
+            {filteredAppointments.length === 0 ? (
+              <tr>
+                <td colSpan="7" style={{ textAlign: "center" }}>
+                  No Appointments Found
                 </td>
               </tr>
-            ))
-          )}
-        </tbody>
-      </table>
+            ) : (
+              filteredAppointments.map((appointment, index) => (
+                <tr key={appointment._id}>
+                  <td>
+                    APT
+                    {String(index + 1).padStart(3, "0")}
+                  </td>
+
+                  <td>{appointment.patient?.fullName}</td>
+
+                  <td>{appointment.doctor?.fullName}</td>
+
+                  <td>{appointment.appointmentDate}</td>
+
+                  <td>{appointment.appointmentTime}</td>
+
+                  <td>
+                    <span className="status admitted">
+                      {appointment.status}
+                    </span>
+                  </td>
+
+                  <td>
+                    <button
+                      className="edit"
+                      onClick={() => onEdit(appointment)}
+                    >
+                      <FaEdit />
+                    </button>
+
+                    <button
+                      className="delete"
+                      onClick={() => handleDelete(appointment._id)}
+                    >
+                      <FaTrash />
+                    </button>
+                  </td>
+                </tr>
+              ))
+            )}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

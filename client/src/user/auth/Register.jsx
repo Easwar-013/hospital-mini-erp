@@ -60,82 +60,96 @@ const Register = () => {
   };
 
   return (
-    <div className="auth-container">
-      <div className="auth-card">
-        <h1>🏥 CITY HOSPITAL</h1>
+    <div className="login-page">
+      {/* Left Side */}
+      <div className="login-left">
+        <div className="left-content">
+          <h1>🏥 CITY HOSPITAL</h1>
 
-        <h2>Patient Registration</h2>
+          <h2>Create Patient Account</h2>
 
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label>Full Name</label>
+          <p>
+            Register to book appointments, download invoices, manage your
+            medical records and securely access hospital services anytime.
+          </p>
+        </div>
+      </div>
 
-            <input
-              type="text"
-              name="fullName"
-              placeholder="Enter Full Name"
-              value={formData.fullName}
-              onChange={handleChange}
-            />
-          </div>
+      {/* Right Side */}
+      <div className="login-right">
+        <div className="auth-card">
+          <div className="login-icon">🏥</div>
 
-          <div className="form-group">
-            <label>Email</label>
+          <h2>Create Account</h2>
 
-            <input
-              type="email"
-              name="email"
-              placeholder="Enter Email"
-              value={formData.email}
-              onChange={handleChange}
-            />
-          </div>
+          <span className="subtitle">Register to continue</span>
 
-          <div className="form-group">
-            <label>Phone</label>
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label>Full Name</label>
+              <input
+                type="text"
+                name="fullName"
+                placeholder="Enter Full Name"
+                value={formData.fullName}
+                onChange={handleChange}
+              />
+            </div>
 
-            <input
-              type="text"
-              name="phone"
-              placeholder="9876543210"
-              value={formData.phone}
-              onChange={handleChange}
-            />
-          </div>
+            <div className="form-group">
+              <label>Email</label>
+              <input
+                type="email"
+                name="email"
+                placeholder="Enter Email"
+                value={formData.email}
+                onChange={handleChange}
+              />
+            </div>
 
-          <div className="form-group">
-            <label>Password</label>
+            <div className="form-group">
+              <label>Phone</label>
+              <input
+                type="text"
+                name="phone"
+                placeholder="9876543210"
+                value={formData.phone}
+                onChange={handleChange}
+              />
+            </div>
 
-            <input
-              type="password"
-              name="password"
-              placeholder="********"
-              value={formData.password}
-              onChange={handleChange}
-            />
-          </div>
+            <div className="form-group">
+              <label>Password</label>
+              <input
+                type="password"
+                name="password"
+                placeholder="Enter Password"
+                value={formData.password}
+                onChange={handleChange}
+              />
+            </div>
 
-          <div className="form-group">
-            <label>Confirm Password</label>
+            <div className="form-group">
+              <label>Confirm Password</label>
+              <input
+                type="password"
+                name="confirmPassword"
+                placeholder="Confirm Password"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+              />
+            </div>
 
-            <input
-              type="password"
-              name="confirmPassword"
-              placeholder="********"
-              value={formData.confirmPassword}
-              onChange={handleChange}
-            />
-          </div>
+            <button type="submit" className="auth-btn">
+              Register
+            </button>
+          </form>
 
-          <button type="submit" className="auth-btn">
-            Register
-          </button>
-        </form>
-
-        <p className="auth-footer">
-          Already have an account?
-          <Link to="/user/login"> Login</Link>
-        </p>
+          <p className="auth-footer">
+            Already have an account?
+            <Link to="/user/login"> Login</Link>
+          </p>
+        </div>
       </div>
     </div>
   );
