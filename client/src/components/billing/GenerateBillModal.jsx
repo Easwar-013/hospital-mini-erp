@@ -11,6 +11,7 @@ import { getPatients } from "../../services/patientService";
 import { getWards } from "../../services/wardService";
 import { getAppointments } from "../../services/appointmentService";
 import "./GenerateBillModal.css";
+import { addNotification } from "../../services/notificationService"; // Add this with your other imports!
 
 const initialFormData = {
   patient: "",
@@ -178,6 +179,7 @@ const GenerateBillModal = ({ isOpen, onClose, selectedBill, onBillSaved }) => {
       }
 
       if (selectedBill) {
+        console.log("Updating bill with ID:", selectedBill._id);
         await updateBill(selectedBill._id, payload);
 
         addNotification({
