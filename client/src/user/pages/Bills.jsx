@@ -15,7 +15,7 @@ const Bills = () => {
     const token = localStorage.getItem("patientToken");
 
     const response = await axios.get(
-      `http://localhost:5000/api/patient-user/bill/${id}/pdf`,
+      `https://hospital-mini-erp.onrender.com/api/patient-user/bill/${id}/pdf`,
       {
         responseType: "blob",
         headers: {
@@ -37,7 +37,7 @@ const Bills = () => {
     const token = localStorage.getItem("patientToken");
 
     const response = await axios.get(
-      `http://localhost:5000/api/patient-user/bill/${id}/pdf`,
+      `https://hospital-mini-erp.onrender.com/api/patient-user/bill/${id}/pdf`,
       {
         responseType: "blob",
         headers: {
