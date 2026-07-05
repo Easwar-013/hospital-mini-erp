@@ -86,50 +86,53 @@ const Bills = () => {
           </p>
         </div>
       ) : (
-        <table className="bill-table">
-          <thead>
-            <tr>
-              <th>Invoice</th>
-              <th>Doctor</th>
-              <th>Total</th>
-              <th>Payment</th>
-              <th>Status</th>
-              <th>pdf</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {bills.map((bill) => (
-              <tr key={bill._id}>
-                <td>{bill.invoiceNumber}</td>
-
-                <td>{bill.doctor?.fullName}</td>
-
-                <td>₹ {bill.totalAmount}</td>
-
-                <td>{bill.paymentMethod}</td>
-
-                <td>{bill.paymentStatus}</td>
-
-                <td>
-                  <button
-                    className="preview-btn"
-                    onClick={() => previewInvoice(bill._id)}
-                  >
-                    👁 Preview
-                  </button>
-
-                  <button
-                    className="download-btn"
-                    onClick={() => downloadInvoice(bill._id)}
-                  >
-                    ⬇ Download
-                  </button>
-                </td>
+        /* Added responsive wrapper here */
+        <div className="table-responsive">
+          <table className="bill-table">
+            <thead>
+              <tr>
+                <th>Invoice</th>
+                <th>Doctor</th>
+                <th>Total</th>
+                <th>Payment</th>
+                <th>Status</th>
+                <th>pdf</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+
+            <tbody>
+              {bills.map((bill) => (
+                <tr key={bill._id}>
+                  <td>{bill.invoiceNumber}</td>
+
+                  <td>{bill.doctor?.fullName}</td>
+
+                  <td>₹ {bill.totalAmount}</td>
+
+                  <td>{bill.paymentMethod}</td>
+
+                  <td>{bill.paymentStatus}</td>
+
+                  <td>
+                    <button
+                      className="preview-btn"
+                      onClick={() => previewInvoice(bill._id)}
+                    >
+                      👁 Preview
+                    </button>
+
+                    <button
+                      className="download-btn"
+                      onClick={() => downloadInvoice(bill._id)}
+                    >
+                      ⬇ Download
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       )}
     </div>
   );

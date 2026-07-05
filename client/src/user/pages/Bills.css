@@ -59,3 +59,11 @@
 .download-btn:hover {
     background: #15803d;
 }
+
+/* Enables smooth horizontal scrolling on mobile */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 8px;
+}

@@ -29,3 +29,11 @@
 .appointment-table tr:hover {
     background: #f8f9fa;
 }
+
+/* Enables smooth horizontal scrolling on mobile */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 8px;
+}
