@@ -56,3 +56,17 @@
 .delete-btn {
     color: #dc2626;
 }
+
+/* ===========================
+   Responsive Table for Mobile
+=========================== */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Forces the table to stay wide so it triggers the scrollbar */
+.table-responsive .custom-table {
+    min-width: 900px;
+}

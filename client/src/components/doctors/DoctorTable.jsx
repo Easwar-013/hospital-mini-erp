@@ -56,71 +56,73 @@ const DoctorTable = ({ doctors, onEdit, onDelete }) => {
         </div>
       </div>
 
-      <table>
-        <thead>
-          <tr>
-            <th>Doctor ID</th>
-            <th>Name</th>
-            <th>Specialization</th>
-            <th>Experience</th>
-            <th>Phone</th>
-            <th>Email</th>
-            <th>Status</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {filteredDoctors.length === 0 ? (
+      <div className="table-responsive">
+        <table>
+          <thead>
             <tr>
-              <td colSpan="8" style={{ textAlign: "center" }}>
-                No Doctors Found
-              </td>
+              <th>Doctor ID</th>
+              <th>Name</th>
+              <th>Specialization</th>
+              <th>Experience</th>
+              <th>Phone</th>
+              <th>Email</th>
+              <th>Status</th>
+              <th>Action</th>
             </tr>
-          ) : (
-            filteredDoctors.map((doctor) => (
-              <tr key={doctor._id}>
-                <td>{doctor.doctorId}</td>
+          </thead>
 
-                <td>{doctor.fullName}</td>
-
-                <td>{doctor.specialization}</td>
-
-                <td>{doctor.experience} Years</td>
-
-                <td>{doctor.phone}</td>
-
-                <td>{doctor.email}</td>
-
-                <td>
-                  <span
-                    className={
-                      doctor.status === "Available"
-                        ? "status admitted"
-                        : "status discharged"
-                    }
-                  >
-                    {doctor.status}
-                  </span>
-                </td>
-
-                <td>
-                  <button className="edit" onClick={() => onEdit(doctor)}>
-                    <FaEdit />
-                  </button>
-
-                  <button
-                    className="delete"
-                    onClick={() => handleDelete(doctor._id)}
-                  >
-                    <FaTrash />
-                  </button>
+          <tbody>
+            {filteredDoctors.length === 0 ? (
+              <tr>
+                <td colSpan="8" style={{ textAlign: "center" }}>
+                  No Doctors Found
                 </td>
               </tr>
-            ))
-          )}
-        </tbody>
-      </table>
+            ) : (
+              filteredDoctors.map((doctor) => (
+                <tr key={doctor._id}>
+                  <td>{doctor.doctorId}</td>
+
+                  <td>{doctor.fullName}</td>
+
+                  <td>{doctor.specialization}</td>
+
+                  <td>{doctor.experience} Years</td>
+
+                  <td>{doctor.phone}</td>
+
+                  <td>{doctor.email}</td>
+
+                  <td>
+                    <span
+                      className={
+                        doctor.status === "Available"
+                          ? "status admitted"
+                          : "status discharged"
+                      }
+                    >
+                      {doctor.status}
+                    </span>
+                  </td>
+
+                  <td>
+                    <button className="edit" onClick={() => onEdit(doctor)}>
+                      <FaEdit />
+                    </button>
+
+                    <button
+                      className="delete"
+                      onClick={() => handleDelete(doctor._id)}
+                    >
+                      <FaTrash />
+                    </button>
+                  </td>
+                </tr>
+              ))
+            )}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };

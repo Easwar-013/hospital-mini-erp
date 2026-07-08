@@ -45,61 +45,63 @@ const AnnouncementTable = ({ announcements, onEdit, onDelete }) => {
         />
       </div>
 
-      <table className="custom-table">
-        <thead>
-          <tr>
-            <th>Icon</th>
-            <th>Title</th>
-            <th>Message</th>
-            <th>Status</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {filteredAnnouncements.length > 0 ? (
-            filteredAnnouncements.map((announcement) => (
-              <tr key={announcement._id}>
-                <td style={{ fontSize: "22px" }}>{announcement.icon}</td>
-
-                <td>{announcement.title}</td>
-
-                <td>{announcement.message}</td>
-
-                <td>
-                  <span
-                    className={`badge ${
-                      announcement.active ? "admitted" : "discharged"
-                    }`}
-                  >
-                    {announcement.active ? "Active" : "Inactive"}
-                  </span>
-                </td>
-
-                <td className="action-buttons">
-                  <button
-                    className="edit-btn"
-                    onClick={() => onEdit(announcement)}
-                  >
-                    <FaEdit />
-                  </button>
-
-                  <button
-                    className="delete-btn"
-                    onClick={() => handleDelete(announcement._id)}
-                  >
-                    <FaTrash />
-                  </button>
-                </td>
-              </tr>
-            ))
-          ) : (
+      <div className="table-responsive">
+        <table className="custom-table">
+          <thead>
             <tr>
-              <td colSpan="5">No Announcements Found</td>
+              <th>Icon</th>
+              <th>Title</th>
+              <th>Message</th>
+              <th>Status</th>
+              <th>Action</th>
             </tr>
-          )}
-        </tbody>
-      </table>
+          </thead>
+
+          <tbody>
+            {filteredAnnouncements.length > 0 ? (
+              filteredAnnouncements.map((announcement) => (
+                <tr key={announcement._id}>
+                  <td style={{ fontSize: "22px" }}>{announcement.icon}</td>
+
+                  <td>{announcement.title}</td>
+
+                  <td>{announcement.message}</td>
+
+                  <td>
+                    <span
+                      className={`badge ${
+                        announcement.active ? "admitted" : "discharged"
+                      }`}
+                    >
+                      {announcement.active ? "Active" : "Inactive"}
+                    </span>
+                  </td>
+
+                  <td className="action-buttons">
+                    <button
+                      className="edit-btn"
+                      onClick={() => onEdit(announcement)}
+                    >
+                      <FaEdit />
+                    </button>
+
+                    <button
+                      className="delete-btn"
+                      onClick={() => handleDelete(announcement._id)}
+                    >
+                      <FaTrash />
+                    </button>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="5">No Announcements Found</td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
