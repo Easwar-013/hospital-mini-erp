@@ -14,38 +14,51 @@
 }
 
 .login-navbar {
-    height: 75px;
-    background: white;
+    height: 80px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    /* Adds a modern glassy blur effect */
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 50px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-    z-index: 10;
+    padding: 0 60px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    border-bottom: 1px solid #f1f5f9;
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
 .navbar-logo {
-    font-size: 22px;
-    font-weight: 700;
-    color: #2563eb;
+    font-size: 24px;
+    font-weight: 800;
+    color: #0f172a;
     letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
+/* Upgraded Admin Button */
 .nav-admin-btn {
-    background: #f1f5f9;
-    color: #0f172a;
-    border: 1px solid #cbd5e1;
-    padding: 10px 22px;
-    border-radius: 8px;
+    background: transparent;
+    color: #2563eb;
+    border: 2px solid #2563eb;
+    padding: 10px 26px;
+    border-radius: 50px;
+    /* Makes it a sleek pill shape */
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
-    transition: 0.3s;
+    transition: all 0.3s ease;
 }
 
 .nav-admin-btn:hover {
-    background: #e2e8f0;
-    border-color: #94a3b8;
+    background: #2563eb;
+    color: white;
+    box-shadow: 0 6px 15px rgba(37, 99, 235, 0.25);
+    transform: translateY(-2px);
+    /* Adds a slight "lift" effect on hover */
 }
 
 /* MAIN CONTAINERS */
@@ -240,6 +253,7 @@
     .nav-admin-btn {
         padding: 8px 14px;
         font-size: 13px;
+        border-width: 1px;
     }
 
     .login-left {
