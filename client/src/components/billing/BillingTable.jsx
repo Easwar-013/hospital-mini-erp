@@ -93,7 +93,10 @@ const BillingTable = ({ bills, onEdit, onDelete, onPreview }) => {
                       <button
                         className="pdf"
                         title="Preview Invoice"
-                        onClick={() => onPreview(bill)}
+                        onClick={(e) => {
+                          e.preventDefault(); // Prevents accidental form submissions if inside a form
+                          onPreview(bill);
+                        }}
                       >
                         <FaFilePdf />
                       </button>
