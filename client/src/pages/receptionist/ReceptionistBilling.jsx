@@ -26,17 +26,28 @@ const ReceptionistBilling = () => {
 
   const handlePreviewPDF = (bill) => {
     const doc = new jsPDF();
-    doc.text(`Invoice: ${bill.invoiceNumber}`, 10, 10);
-    doc.text(`Patient: ${bill.patient?.fullName}`, 10, 20);
-    doc.text(`Total Amount: ₹ ${bill.totalAmount}`, 10, 30);
 
-    // Add table if needed
+    // Add text with increased vertical spacing
+    doc.setFontSize(18);
+    doc.text(`Invoice: ${bill.invoiceNumber}`, 10, 20);
+
+    doc.setFontSize(12);
+    doc.text(`Patient: ${bill.patient?.fullName}`, 10, 35);
+    doc.text(`Total Amount: ₹ ${bill.totalAmount}`, 10, 45);
+
+    // Use autoTable with startY set to leave space for the text above
     autoTable(doc, {
+      startY: 55, // Ensure this is lower than your last doc.text y-coordinate (45)
       head: [["Description", "Amount"]],
-      body: [["Consultation", bill.consultationFee]],
+      body: [
+        ["Consultation", bill.consultationFee],
+        ["Medicine", bill.medicineCharge || 0],
+        ["Total", bill.totalAmount],
+      ],
     });
 
-    doc.save(`${bill.invoiceNumber}.pdf`);
+    // Open in a new window instead of saving/downloading
+    window.open(doc.output("bloburl"), "_blank");
   };
 
   return (
