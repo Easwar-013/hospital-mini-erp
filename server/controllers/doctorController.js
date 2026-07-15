@@ -17,6 +17,7 @@ export const createDoctor = async (req, res) => {
       username,
       password: hashedPassword,
       email,
+      phone,
       role: "doctor",
       specialization,
       department: specialization,
