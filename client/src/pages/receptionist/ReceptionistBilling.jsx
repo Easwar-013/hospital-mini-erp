@@ -31,12 +31,9 @@ const ReceptionistBilling = () => {
     doc.text(`Total Amount: ₹ ${bill.totalAmount}`, 10, 30);
 
     // Add table if needed
-    autoTable({
+    autoTable(doc, {
       head: [["Description", "Amount"]],
-      body: [
-        ["Consultation", bill.consultationFee],
-        ["Total", bill.totalAmount],
-      ],
+      body: [["Consultation", bill.consultationFee]],
     });
 
     doc.save(`${bill.invoiceNumber}.pdf`);
