@@ -32,6 +32,7 @@ import ReceptionistDashboard from "../pages/receptionist/ReceptionistDashboard";
 import ReceptionistAppointments from "../pages/receptionist/ReceptionistAppointments";
 import RegisterPatient from "../pages/receptionist/RegisterPatient";
 import ReceptionistAnnouncements from "../pages/receptionist/ReceptionistAnnouncements";
+import ReceptionistBilling from "../pages/receptionist/ReceptionistBilling";
 
 const AppRoutes = () => {
   return (
