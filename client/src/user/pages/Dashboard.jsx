@@ -46,7 +46,7 @@ const Dashboard = () => {
 
       <div className="welcome-card">
         <div>
-          <h1>Welcome, {dashboard?.patientName} 👋</h1>
+          <h1>Welcome, {dashboard?.patientName} </h1>
 
           <p>
             Manage your appointments, bills and hospital services from one
@@ -168,10 +168,10 @@ const Dashboard = () => {
 
         {dashboard?.notifications?.length > 0 ? (
           <ul className="notification-list">
-            {dashboard.notifications.map((item, index) => (
+            {/* Added .slice(0, 5) to limit the display to the first 5 items */}
+            {dashboard.notifications.slice(0, 5).map((item, index) => (
               <li key={index}>
                 <span>{item.icon}</span>
-
                 {item.message}
               </li>
             ))}

@@ -1,135 +1,65 @@
 import Patient from "../models/Patient.js";
 import Doctor from "../models/Doctor.js";
+import PatientUser from "../models/PatientUser.js";
 
 // Create Patient
 export const createPatient = async (req, res) => {
   try {
-    // Generate Patient ID
-   // Get latest patient
     const lastPatient = await Patient.findOne().sort({ patientId: -1 });
-
     let patientId = "P001";
-
     if (lastPatient) {
-        const lastNumber = parseInt(lastPatient.patientId.substring(1));
-
-        patientId = `P${String(lastNumber + 1).padStart(3, "0")}`;
+      const lastNumber = parseInt(lastPatient.patientId.substring(1));
+      patientId = `P${String(lastNumber + 1).padStart(3, "0")}`;
     }
-
-    const patient = await Patient.create({
-      patientId,
-      ...req.body,
-    });
-
-    res.status(201).json({
-      success: true,
-      message: "Patient Added Successfully",
-      patient,
-    });
-
+    const patient = await Patient.create({ patientId, ...req.body });
+    res.status(201).json({ success: true, message: "Patient Added Successfully", patient });
   } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: error.message,
-    });
+    res.status(500).json({ success: false, message: error.message });
   }
 };
 
 // Get Patients
-// Get Patients
 export const getPatients = async (req, res) => {
   try {
-    // Fetch all patients and doctors as raw JSON objects using .lean()
     const patients = await Patient.find().sort({ createdAt: -1 }).lean();
     const doctors = await Doctor.find().lean();
-
-    // Manually attach the doctor's full name if the field is a Database ID
     const updatedPatients = patients.map((patient) => {
-      // Check if the doctor field exists and looks like a MongoDB ID (24 characters)
       if (patient.doctor && patient.doctor.toString().length === 24) {
-        
-        // Find the doctor that matches this ID
-        const matchedDoctor = doctors.find(
-          (doc) => doc._id.toString() === patient.doctor.toString()
-        );
-
+        const matchedDoctor = doctors.find((doc) => doc._id.toString() === patient.doctor.toString());
         if (matchedDoctor) {
-          // Replace the ID string with an object so your frontend table reads the fullName perfectly!
-          patient.doctor = {
-            _id: matchedDoctor._id,
-            fullName: matchedDoctor.fullName,
-          };
+          patient.doctor = { _id: matchedDoctor._id, fullName: matchedDoctor.fullName };
         }
       }
       return patient;
     });
-
-    res.status(200).json({
-      success: true,
-      patients: updatedPatients,
-    });
-
+    res.status(200).json({ success: true, patients: updatedPatients });
   } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: error.message,
-    });
+    res.status(500).json({ success: false, message: error.message });
   }
 };
+
 // Update Patient
 export const updatePatient = async (req, res) => {
   try {
-    const patient = await Patient.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      {
-        new: true,
-        runValidators: true,
-      }
-    );
-
-    if (!patient) {
-      return res.status(404).json({
-        success: false,
-        message: "Patient not found",
-      });
-    }
-
-    res.status(200).json({
-      success: true,
-      message: "Patient Updated Successfully",
-      patient,
-    });
-
+    const patient = await Patient.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
+    if (!patient) return res.status(404).json({ success: false, message: "Patient not found" });
+    res.status(200).json({ success: true, message: "Patient Updated Successfully", patient });
   } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: error.message,
-    });
+    res.status(500).json({ success: false, message: error.message });
   }
 };
 
-// Delete Patient
+// Delete Patient (Updated to remove associated user account)
 export const deletePatient = async (req, res) => {
   try {
     const patient = await Patient.findByIdAndDelete(req.params.id);
+    if (!patient) return res.status(404).json({ success: false, message: "Patient not found" });
 
-    if (!patient) {
-      return res.status(404).json({
-        success: false,
-        message: "Patient not found",
-      });
-    }
+    // Also remove the associated PatientUser account using the phone number
+    await PatientUser.findOneAndDelete({ phone: patient.phone });
 
-    res.status(200).json({
-      success: true,
-      message: "Patient Deleted Successfully",
-    });
-
+    res.status(200).json({ success: true, message: "Patient and User account deleted successfully" });
   } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: error.message,
-    });
+    res.status(500).json({ success: false, message: error.message });
   }
 };

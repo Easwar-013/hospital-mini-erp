@@ -1,9 +1,7 @@
 import { useState } from "react";
 import { FaSearch, FaEdit, FaTrash, FaFilePdf } from "react-icons/fa";
 import { toast } from "react-toastify";
-
 import { deleteBill } from "../../services/billingService";
-
 import "./BillingTable.css";
 
 const BillingTable = ({ bills, onEdit, onDelete, onPreview }) => {
@@ -13,14 +11,11 @@ const BillingTable = ({ bills, onEdit, onDelete, onPreview }) => {
     const confirmDelete = window.confirm(
       "Are you sure you want to delete this bill?",
     );
-
     if (!confirmDelete) return;
 
     try {
       await deleteBill(id);
-
       toast.success("Bill Deleted Successfully");
-
       onDelete();
     } catch (error) {
       toast.error(error.response?.data?.message || "Delete Failed");
@@ -29,7 +24,6 @@ const BillingTable = ({ bills, onEdit, onDelete, onPreview }) => {
 
   const filteredBills = bills.filter((bill) => {
     const keyword = search.toLowerCase();
-
     return (
       bill.patient?.fullName?.toLowerCase().includes(keyword) ||
       bill.doctor?.fullName?.toLowerCase().includes(keyword) ||
@@ -42,7 +36,6 @@ const BillingTable = ({ bills, onEdit, onDelete, onPreview }) => {
       <div className="table-header">
         <div className="search-box">
           <FaSearch />
-
           <input
             type="text"
             placeholder="Search Bill..."
@@ -52,7 +45,6 @@ const BillingTable = ({ bills, onEdit, onDelete, onPreview }) => {
         </div>
       </div>
 
-      {/* Responsive Wrapper */}
       <div className="table-responsive">
         <table>
           <thead>
@@ -66,7 +58,6 @@ const BillingTable = ({ bills, onEdit, onDelete, onPreview }) => {
               <th>Action</th>
             </tr>
           </thead>
-
           <tbody>
             {filteredBills.length === 0 ? (
               <tr>
@@ -75,46 +66,38 @@ const BillingTable = ({ bills, onEdit, onDelete, onPreview }) => {
                 </td>
               </tr>
             ) : (
-              filteredBills.map((bill, index) => (
+              filteredBills.map((bill) => (
                 <tr key={bill._id}>
-                  <td>
-                    INV
-                    {String(index + 1).padStart(4, "0")}
-                  </td>
-
+                  {/* FIX: Use the unique invoiceNumber from the database */}
+                  <td>{bill.invoiceNumber}</td>
                   <td>{bill.patient?.fullName}</td>
-
                   <td>{bill.doctor?.fullName}</td>
-
                   <td>₹ {bill.totalAmount}</td>
-
                   <td>
                     <span className="status admitted">
                       {bill.paymentStatus}
                     </span>
                   </td>
-
                   <td>{bill.paymentMethod}</td>
-
                   <td>
-                    <button className="edit" onClick={() => onEdit(bill)}>
-                      <FaEdit />
-                    </button>
-
-                    <button
-                      className="delete"
-                      onClick={() => handleDelete(bill._id)}
-                    >
-                      <FaTrash />
-                    </button>
-
-                    <button
-                      className="pdf"
-                      title="Preview Invoice"
-                      onClick={() => onPreview(bill)}
-                    >
-                      <FaFilePdf />
-                    </button>
+                    <div className="action-buttons">
+                      <button className="edit" onClick={() => onEdit(bill)}>
+                        <FaEdit />
+                      </button>
+                      <button
+                        className="delete"
+                        onClick={() => handleDelete(bill._id)}
+                      >
+                        <FaTrash />
+                      </button>
+                      <button
+                        className="pdf"
+                        title="Preview Invoice"
+                        onClick={() => onPreview(bill)}
+                      >
+                        <FaFilePdf />
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))

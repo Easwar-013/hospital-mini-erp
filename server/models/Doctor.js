@@ -45,10 +45,15 @@ const doctorSchema = new mongoose.Schema(
       enum: ["Available", "On Leave"],
       default: "Available",
     },
+
+    userId: { 
+      type: mongoose.Schema.Types.ObjectId, 
+      ref: "User" 
+    },
   },
   {
     timestamps: true,
   }
 );
 
-export default mongoose.model("Doctor", doctorSchema);
+export default mongoose.model("Doctor", doctorSchema, "doctors");

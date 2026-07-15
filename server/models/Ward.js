@@ -40,4 +40,4 @@ const wardSchema = new mongoose.Schema(
   }
 );
 
-export default mongoose.model("Ward", wardSchema);
+export default mongoose.model("Ward", wardSchema, "wards");

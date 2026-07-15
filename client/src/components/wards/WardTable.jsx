@@ -104,16 +104,17 @@ const WardTable = ({ wards, onEdit, onDelete }) => {
                   </td>
 
                   <td>
-                    <button className="edit" onClick={() => onEdit(ward)}>
-                      <FaEdit />
-                    </button>
-
-                    <button
-                      className="delete"
-                      onClick={() => handleDelete(ward._id)}
-                    >
-                      <FaTrash />
-                    </button>
+                    <div className="action-buttons">
+                      <button className="edit" onClick={() => onEdit(ward)}>
+                        <FaEdit />
+                      </button>
+                      <button
+                        className="delete"
+                        onClick={() => handleDelete(ward._id)}
+                      >
+                        <FaTrash />
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))

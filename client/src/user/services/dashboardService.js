@@ -1,16 +1,7 @@
-import api from "../../services/axios";
+import api from "../../services/axios"; // Ensure this path is correct
 
 export const getDashboard = async () => {
-  const token = localStorage.getItem("patientToken");
-
-  const response = await api.get(
-    "/patient-user/dashboard",
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
-
+  // The interceptor in axios.js will automatically add the token
+  const response = await api.get("/patient-user/dashboard");
   return response.data;
 };

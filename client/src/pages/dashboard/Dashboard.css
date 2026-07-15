@@ -1,200 +1,178 @@
-.welcome-banner {
+/* Prefixing with 'admin-' to avoid conflicts with Doctor Portal CSS */
 
+.admin-welcome-banner {
     background: linear-gradient(135deg, #2563EB, #1E40AF);
-
     color: white;
-
     padding: 40px;
-
     border-radius: 22px;
-
-    margin-bottom: 10px;
-
+    margin-bottom: 25px;
     box-shadow: 0 15px 35px rgba(37, 99, 235, .25);
-
 }
 
-.welcome-banner h1 {
-
+.admin-welcome-banner h1 {
     font-size: 34px;
-
     margin-bottom: 12px;
-
 }
 
-.welcome-banner p {
-
+.admin-welcome-banner p {
     width: 70%;
-
     line-height: 1.7;
-
     opacity: .95;
-
 }
 
-/* Status Badge */
-
+/* Modern Badge Styling */
 .badge {
-
-    padding: 6px 14px;
-
-    border-radius: 30px;
-
-    font-size: 13px;
-
+    padding: 6px 12px;
+    border-radius: 20px;
+    /* Pill shape */
+    font-size: 12px;
     font-weight: 600;
-
+    text-transform: capitalize;
 }
 
 .admitted {
+    background-color: #dcfce7;
+    color: #166534;
+}
 
-    background: #DCFCE7;
+/* Modern styling for Out Patient */
+.out-patient {
+    background-color: #dbeafe;
+    color: #1e40af;
+}
 
-    color: #15803D;
-
+.pending {
+    background-color: #fef3c7;
+    color: #92400e;
 }
 
 .discharged {
-
     background: #F3F4F6;
-
     color: #374151;
-
 }
 
-.dashboard {
-
+.admin-dashboard {
     display: flex;
-
     flex-direction: column;
-
     gap: 30px;
 }
 
-.card-grid {
-
+.admin-card-grid {
     display: grid;
-
-    grid-template-columns: repeat(4, 1fr);
-
-    gap: 20px;
+    /* Change repeat(4, 1fr) to repeat(5, 1fr) */
+    grid-template-columns: repeat(5, 1fr);
+    gap: 15px;
+    /* Slightly reduced gap to ensure they fit nicely */
 }
 
-.dashboard-row {
-
+.admin-dashboard-row {
     display: grid;
-
     grid-template-columns: 2fr 1fr;
-
     gap: 20px;
 }
 
-.dashboard-box {
-
+.admin-dashboard-box {
     background: #fff;
-
     border-radius: 18px;
-
     padding: 25px;
-
     box-shadow: 0 10px 25px rgba(0, 0, 0, .06);
 }
 
-.dashboard-box h3 {
-
+.admin-dashboard-box h3 {
     margin-bottom: 20px;
 }
 
-table {
-
+.admin-dashboard-box table {
     width: 100%;
-
     border-collapse: collapse;
 }
 
-th,
-td {
-
+.admin-dashboard-box th,
+.admin-dashboard-box td {
     padding: 14px;
-
     text-align: left;
-
     border-bottom: 1px solid #E5E7EB;
 }
 
-th {
-
+.admin-dashboard-box th {
     color: #6B7280;
-
     font-weight: 600;
 }
 
-.appointment-list {
-
+.admin-appointment-list {
     display: flex;
-
     flex-direction: column;
-
     gap: 18px;
-
     list-style: none;
+    padding: 0;
 }
 
-.appointment-list li {
-
-    padding: 14px;
-
+.admin-appointment-list li {
+    padding: 15px;
     background: #F8FAFC;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    display: flex;
+    flex-direction: column;
+    /* This forces them to stack vertically */
+    gap: 4px;
+    /* Adds small space between date and name */
+    border-left: 4px solid #3b82f6;
+}
 
-    border-radius: 10px;
+.apt-date {
+    font-size: 11px;
+    color: #6b7280;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+/* Style the name */
+.apt-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #111827;
 }
 
 /* ===================================
    MOBILE & TABLET RESPONSIVE RULES
 =================================== */
 
-/* Tablet View (Screens smaller than 1024px) */
 @media screen and (max-width: 1024px) {
-    .card-grid {
+    .admin-card-grid {
         grid-template-columns: repeat(2, 1fr);
-        /* 2x2 grid for stats */
     }
 
-    .dashboard-row {
+    .admin-dashboard-row {
         grid-template-columns: 1fr;
-        /* Stacks the row sections vertically */
     }
 }
 
-/* Mobile View (Screens smaller than 768px) */
 @media screen and (max-width: 768px) {
-    .welcome-banner {
+    .admin-welcome-banner {
         padding: 25px 20px;
         border-radius: 16px;
     }
 
-    .welcome-banner h1 {
+    .admin-welcome-banner h1 {
         font-size: 24px;
     }
 
-    .welcome-banner p {
+    .admin-welcome-banner p {
         width: 100%;
-        /* Allows text to take full width instead of 70% */
         font-size: 14px;
     }
 
-    .card-grid {
+    .admin-card-grid {
         grid-template-columns: 1fr;
-        /* Stacks all stat cards in 1 single column */
         gap: 15px;
     }
 
-    .dashboard-box {
+    .admin-dashboard-box {
         padding: 20px 15px;
     }
 
-    /* Makes the table horizontally scrollable if data gets too wide */
-    .dashboard-box table {
+    .admin-dashboard-box table {
         display: block;
         overflow-x: auto;
         white-space: nowrap;

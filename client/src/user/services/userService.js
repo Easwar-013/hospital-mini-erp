@@ -1,56 +1,53 @@
-import api from "../../services/axios";
+import api from "../../services/axios"; // Adjust path if your axios config is elsewhere
 
-// Register
+// ==========================================
+// REGISTRATION & LOGIN
+// ==========================================
+
+// Standard Register
 export const registerUser = async (userData) => {
   const response = await api.post("/patient-user/register", userData);
   return response.data;
 };
 
-// Login
+// Standard Email Login
 export const loginUser = async (loginData) => {
   const response = await api.post("/patient-user/login", loginData);
   return response.data;
 };
 
-// Profile
-export const getUserProfile = async (token) => {
-  const response = await api.get("/patient-user/profile", {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-
+// NEW: Google Login
+export const googleLoginUser = async (googleData) => {
+  const response = await api.post("/patient-user/google-login", googleData);
   return response.data;
 };
 
+// NEW: Phone OTP Login
+export const phoneLoginUser = async (phoneData) => {
+  const response = await api.post("/patient-user/phone-login", phoneData);
+  return response.data;
+};
+
+// ==========================================
+// USER PROFILE & APPOINTMENTS
+// ==========================================
+
+// Profile
+export const getUserProfile = async () => {
+  const response = await api.get("/patient-user/profile"); // Interceptor adds token
+  return response.data;
+};
+
+// Book Appointment
+// Update these functions in src/user/services/userService.js
 export const bookAppointment = async (data) => {
-  const token = localStorage.getItem("patientToken");
-
-  const response = await api.post(
-    "/patient-user/book-appointment",
-    data,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
-
+  // REMOVED manual token retrieval and header injection
+  const response = await api.post("/patient-user/book-appointment", data);
   return response.data;
 };
 
 export const getMyAppointments = async () => {
-  const token = localStorage.getItem("patientToken");
-
-  const response = await api.get(
-    "/patient-user/my-appointments",
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
-
-  // FIX: Drill down one more level to return just the array!
+  // REMOVED manual token retrieval and header injection
+  const response = await api.get("/patient-user/my-appointments");
   return response.data.appointments; 
 };

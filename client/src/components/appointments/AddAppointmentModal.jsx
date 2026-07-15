@@ -20,6 +20,7 @@ const initialFormData = {
   appointmentDate: "",
   appointmentTime: "",
   status: "Scheduled",
+  reason: "", // Added reason field
 };
 
 const AddAppointmentModal = ({
@@ -58,6 +59,7 @@ const AddAppointmentModal = ({
         appointmentDate: selectedAppointment.appointmentDate || "",
         appointmentTime: selectedAppointment.appointmentTime || "",
         status: selectedAppointment.status || "Scheduled",
+        reason: selectedAppointment.reason || "", // Added reason field
       });
     } else {
       setFormData(initialFormData);
@@ -96,18 +98,14 @@ const AddAppointmentModal = ({
     }
 
     try {
-      // Grab the logged-in user from localStorage
       const currentUser = JSON.parse(localStorage.getItem("user"));
 
-      // Create a complete payload with the required user ID attached
       const payloadToSubmit = {
         ...formData,
         user: currentUser?._id || currentUser?.id,
       };
 
       if (selectedAppointment) {
-        console.log("Submitting formData:", payloadToSubmit);
-        // Pass the new payload here
         await updateAppointment(selectedAppointment._id, payloadToSubmit);
 
         addNotification({
@@ -118,7 +116,6 @@ const AddAppointmentModal = ({
 
         toast.success("Appointment Updated Successfully");
       } else {
-        // Pass the new payload here
         await addAppointment(payloadToSubmit);
 
         addNotification({
@@ -156,13 +153,11 @@ const AddAppointmentModal = ({
         <form className="patient-form" onSubmit={handleSubmit}>
           <div className="form-group">
             <label>Appointment ID</label>
-
             <input value="Auto Generated" disabled />
           </div>
 
           <div className="form-group">
             <label>Patient</label>
-
             <Select
               options={patientOptions}
               placeholder="Search Patient..."
@@ -183,7 +178,6 @@ const AddAppointmentModal = ({
 
           <div className="form-group">
             <label>Doctor</label>
-
             <Select
               options={doctorOptions}
               placeholder="Search Doctor..."
@@ -206,7 +200,6 @@ const AddAppointmentModal = ({
           <div className="form-row">
             <div className="form-group">
               <label>Date</label>
-
               <input
                 type="date"
                 name="appointmentDate"
@@ -217,7 +210,6 @@ const AddAppointmentModal = ({
 
             <div className="form-group">
               <label>Time</label>
-
               <input
                 type="time"
                 name="appointmentTime"
@@ -227,15 +219,32 @@ const AddAppointmentModal = ({
             </div>
           </div>
 
+          {/* NEW REASON FIELD */}
+          <div className="form-group">
+            <label>Reason for Visit</label>
+            <textarea
+              name="reason"
+              rows="3"
+              placeholder="Briefly describe the reason for the visit..."
+              value={formData.reason}
+              onChange={handleChange}
+              style={{
+                width: "100%",
+                padding: "12px",
+                borderRadius: "8px",
+                border: "1px solid #d1d5db",
+                fontFamily: "inherit",
+                resize: "vertical",
+              }}
+            />
+          </div>
+
           <div className="form-group">
             <label>Status</label>
-
             <select
               name="status"
               value={formData.status}
               onChange={(e) => {
-                console.log("Status changed:", e.target.value);
-
                 setFormData({
                   ...formData,
                   status: e.target.value,

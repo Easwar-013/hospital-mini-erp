@@ -1,8 +1,12 @@
 import "./StatCard.css";
 
-const StatCard = ({ title, value, icon, color }) => {
+const StatCard = ({ title, value, icon, color, onClick }) => {
   return (
-    <div className="stat-card">
+    <div
+      className="stat-card"
+      onClick={onClick}
+      style={{ cursor: onClick ? "pointer" : "default" }}
+    >
       <div className="stat-icon" style={{ background: color }}>
         {icon}
       </div>

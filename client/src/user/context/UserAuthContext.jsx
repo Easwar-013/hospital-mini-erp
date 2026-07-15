@@ -5,19 +5,23 @@ const UserAuthContext = createContext();
 
 export const UserAuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-
-  const [token, setToken] = useState(localStorage.getItem("patientToken"));
+  // CHANGED: Use "token" instead of "patientToken"
+  const [token, setToken] = useState(localStorage.getItem("token"));
 
   useEffect(() => {
-    if (token) {
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+
+    // Only load profile if we have a token AND the role is specifically 'patient'
+    if (token && storedUser && storedUser.role === "patient") {
       loadProfile();
     }
   }, [token]);
 
   const loadProfile = async () => {
     try {
+      // CHANGED: No need to pass token manually if axios interceptor is used,
+      // but keeping it as-is is fine if your backend still requires it.
       const data = await getUserProfile(token);
-
       setUser(data.user);
     } catch {
       logout();
@@ -25,16 +29,15 @@ export const UserAuthProvider = ({ children }) => {
   };
 
   const login = (jwt) => {
-    localStorage.setItem("patientToken", jwt);
-
+    // CHANGED: Use "token"
+    localStorage.setItem("token", jwt);
     setToken(jwt);
   };
 
   const logout = () => {
-    localStorage.removeItem("patientToken");
-
+    // CHANGED: Use "token"
+    localStorage.removeItem("token");
     setToken(null);
-
     setUser(null);
   };
 

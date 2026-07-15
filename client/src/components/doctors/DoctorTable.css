@@ -70,31 +70,33 @@
 
 }
 
+/* Container to hold buttons horizontally */
+.action-buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Updated button styles */
 .edit,
 .delete {
-
     border: none;
-
     background: none;
-
     cursor: pointer;
-
     font-size: 17px;
-
-    margin-right: 10px;
-
+    margin-right: 0;
+    /* Remove right margin to rely on container gap */
+    display: flex;
+    align-items: center;
 }
 
 .edit {
-
     color: #2563EB;
-
 }
 
 .delete {
-
     color: #EF4444;
-
 }
 
 /* ===========================

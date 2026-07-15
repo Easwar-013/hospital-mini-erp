@@ -8,6 +8,7 @@ import {
   FaFileInvoiceDollar,
   FaCog,
   FaSignOutAlt,
+  FaUserTie,
 } from "react-icons/fa";
 
 import { NavLink } from "react-router-dom";
@@ -21,6 +22,7 @@ const Sidebar = () => {
     { name: "Dashboard", icon: <FaChartPie />, path: "/dashboard" },
     { name: "Patients", icon: <FaUserInjured />, path: "/patients" },
     { name: "Doctors", icon: <FaUserMd />, path: "/doctors" },
+    { name: "Receptionists", icon: <FaUserTie />, path: "/receptionists" },
     { name: "Appointments", icon: <FaCalendarCheck />, path: "/appointments" },
     { name: "Ward Management", icon: <FaBed />, path: "/wards" },
     { name: "Billing", icon: <FaFileInvoiceDollar />, path: "/billing" },

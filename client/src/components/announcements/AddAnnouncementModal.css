@@ -167,47 +167,40 @@
 }
 
 .modal-footer {
-
     display: flex;
-
     justify-content: flex-end;
-
-    gap: 15px;
-
-    margin-top: 10px;
+    gap: 10px;
+    margin-top: 20px;
 }
 
 .cancel-btn {
-
-    padding: 12px 20px;
-
-    border: 1px solid #CBD5E1;
-
-    border-radius: 10px;
-
-    background: white;
-
+    padding: 10px 20px;
+    background-color: #f3f4f6;
+    /* Light grey background */
+    color: #374151;
+    /* Add dark text color */
+    border: 1px solid #d1d5db;
+    /* Add border for better visibility */
+    border-radius: 6px;
     cursor: pointer;
+    font-weight: 500;
 }
 
 .save-btn {
-
-    padding: 12px 20px;
-
-    border: none;
-
-    border-radius: 10px;
-
-    background: #2563EB;
-
+    padding: 10px 20px;
+    background-color: #2563eb;
     color: white;
-
+    border: none;
+    border-radius: 6px;
     cursor: pointer;
-
-    transition: .3s;
 }
 
 .save-btn:hover {
 
     background: #1D4ED8;
+}
+
+.cancel-btn:hover {
+    background-color: #e5e7eb;
+    /* Slightly darker on hover */
 }

@@ -12,28 +12,67 @@
     background: white;
     border-radius: 12px;
     overflow: hidden;
+    /* Change to 'auto' so columns only take up necessary space */
+    table-layout: auto;
 }
 
 .appointment-table th,
 .appointment-table td {
     padding: 15px;
     border-bottom: 1px solid #eee;
+    text-align: left !important;
+    /* Forces left alignment */
+    white-space: normal;
+    word-wrap: break-word;
+}
+
+/* Force the Status column to align left, closer to the previous columns */
+.appointment-table th:last-child,
+.appointment-table td:last-child {
     text-align: left;
+    padding-left: 20px;
+    /* Adjust this to control the gap */
 }
 
 .appointment-table th {
     background: #2563eb;
     color: white;
+    text-align: left !important;
+    /* Ensures headers align with the cells below */
 }
 
 .appointment-table tr:hover {
     background: #f8f9fa;
 }
 
-/* Enables smooth horizontal scrolling on mobile */
+.appointment-table th:nth-child(1) {
+    width: 20%;
+}
+
+/* ID */
+.appointment-table th:nth-child(2) {
+    width: 25%;
+}
+
+/* Doctor */
+.appointment-table th:nth-child(3) {
+    width: 20%;
+}
+
+/* Date */
+.appointment-table th:nth-child(4) {
+    width: 15%;
+}
+
+/* Time */
+.appointment-table th:nth-child(5) {
+    width: 20%;
+}
+
+/* Status */
+
 .table-responsive {
     width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
+    overflow-x: hidden;
     border-radius: 8px;
 }

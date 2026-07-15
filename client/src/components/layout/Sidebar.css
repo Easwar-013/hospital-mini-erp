@@ -1,24 +1,21 @@
+/* Sidebar.css */
 .sidebar {
     width: 270px;
     height: 100vh;
     background: #0f172a;
     color: white;
-    position: fixed;
-    left: 0;
-    top: 0;
-
+    /* REMOVE THIS: position: fixed; left: 0; top: 0; */
+    flex-shrink: 0;
+    /* Ensures it stays at 270px */
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-
     padding: 24px;
-
     box-shadow: 8px 0 25px rgba(0, 0, 0, .12);
     z-index: 100;
 }
 
 /* Logo */
-
 .sidebar-logo {
     display: flex;
     align-items: center;
@@ -29,15 +26,11 @@
 .logo-circle {
     width: 58px;
     height: 58px;
-
     border-radius: 18px;
-
     background: linear-gradient(135deg, #2563eb, #3b82f6);
-
     display: flex;
     justify-content: center;
     align-items: center;
-
     font-size: 28px;
 }
 
@@ -52,31 +45,23 @@
 }
 
 /* Menu */
-
 .sidebar-menu {
     display: flex;
     flex-direction: column;
     gap: 10px;
-
     flex: 1;
 }
 
 .sidebar-link {
     text-decoration: none;
     color: #cbd5e1;
-
     display: flex;
     align-items: center;
     gap: 16px;
-
     padding: 14px 18px;
-
     border-radius: 14px;
-
     transition: .25s ease;
-
     font-weight: 500;
-
     position: relative;
 }
 
@@ -97,90 +82,33 @@
 
 .sidebar-link.active::before {
     content: "";
-
     position: absolute;
-
     left: -24px;
-
     width: 5px;
     height: 30px;
-
     border-radius: 20px;
-
     background: white;
 }
 
 /* Footer */
-
 .sidebar-footer {
     border-top: 1px solid rgba(255, 255, 255, .08);
-
     padding-top: 22px;
 }
 
-/* Admin Card */
-
-.admin-card {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-
-    background: #1e293b;
-
-    border-radius: 16px;
-
-    padding: 15px;
-
-    margin-bottom: 18px;
-}
-
-.admin-avatar {
-    width: 48px;
-    height: 48px;
-
-    border-radius: 50%;
-
-    background: #2563eb;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    font-size: 18px;
-    font-weight: bold;
-}
-
-.admin-card h4 {
-    font-size: 15px;
-}
-
-.admin-card p {
-    font-size: 12px;
-    color: #94a3b8;
-}
-
 /* Logout */
-
 .logout-btn {
     width: 100%;
-
     padding: 13px;
-
     border: 1px solid rgba(255, 255, 255, .12);
-
     border-radius: 12px;
-
     background: transparent;
-
     color: #ef4444;
-
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 10px;
-
     cursor: pointer;
-
     transition: .25s;
 }
 
@@ -190,11 +118,9 @@
 }
 
 /* ===================================
-   TABLET RESPONSIVE
+   TABLET RESPONSIVE (900px)
 =================================== */
-
-@media screen and (max-width:900px) {
-
+@media screen and (max-width: 900px) {
     .sidebar {
         width: 80px;
         padding: 18px 10px;
@@ -246,14 +172,13 @@
 }
 
 /* ===================================
-   MOBILE RESPONSIVE SIDEBAR
+   MOBILE RESPONSIVE (768px)
 =================================== */
 @media screen and (max-width: 768px) {
     .sidebar {
         width: 100% !important;
         height: auto !important;
         position: relative !important;
-        /* Un-fixes it from the left side */
         padding: 15px !important;
         display: block !important;
     }
@@ -263,12 +188,10 @@
         justify-content: flex-start !important;
     }
 
-    /* Bring back the logo text that the tablet view hid */
     .sidebar-logo div:last-child {
         display: block !important;
     }
 
-    /* Make links scroll horizontally instead of stacking */
     .sidebar-menu {
         flex-direction: row !important;
         overflow-x: auto;
@@ -280,16 +203,13 @@
     .sidebar-link {
         padding: 10px 15px !important;
         white-space: nowrap;
-        /* Stops text from wrapping to the next line */
         height: fit-content;
     }
 
-    /* Bring back the link text that the tablet view hid */
     .sidebar-link span {
         display: inline !important;
     }
 
-    /* Hide the vertical active indicator on mobile */
     .sidebar-link.active::before {
         display: none;
     }
@@ -299,7 +219,6 @@
         display: block;
     }
 
-    /* Bring back logout text */
     .logout-btn {
         font-size: 14px !important;
         padding: 10px !important;

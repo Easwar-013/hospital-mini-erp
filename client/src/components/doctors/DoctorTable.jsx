@@ -106,16 +106,17 @@ const DoctorTable = ({ doctors, onEdit, onDelete }) => {
                   </td>
 
                   <td>
-                    <button className="edit" onClick={() => onEdit(doctor)}>
-                      <FaEdit />
-                    </button>
-
-                    <button
-                      className="delete"
-                      onClick={() => handleDelete(doctor._id)}
-                    >
-                      <FaTrash />
-                    </button>
+                    <div className="action-buttons">
+                      <button className="edit" onClick={() => onEdit(doctor)}>
+                        <FaEdit />
+                      </button>
+                      <button
+                        className="delete"
+                        onClick={() => handleDelete(doctor._id)}
+                      >
+                        <FaTrash />
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))

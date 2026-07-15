@@ -1,135 +1,96 @@
+/* Container styling */
 .patient-table {
-
     background: white;
-
     border-radius: 18px;
-
     padding: 25px;
-
     box-shadow: 0 10px 25px rgba(0, 0, 0, .05);
-
+    width: 100%;
+    /* Ensure container is full width */
+    box-sizing: border-box;
 }
 
 .table-header {
-
     display: flex;
-
     justify-content: space-between;
-
     margin-bottom: 20px;
-
 }
 
-.search-box {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 12px;
-
-    background: #F8FAFC;
-
-    border: 1px solid #E5E7EB;
-
-    padding: 12px 18px;
-
-    border-radius: 12px;
-
-    width: 320px;
-
-}
-
-.search-box input {
-
-    border: none;
-
-    outline: none;
-
-    background: none;
-
-    width: 100%;
-
-}
-
-.status {
-
-    padding: 6px 14px;
-
-    border-radius: 30px;
-
-    font-size: 13px;
-
-}
-
-.admitted {
-
-    background: #DCFCE7;
-
-    color: #15803D;
-
-}
-
-.edit,
-.delete {
-
-    border: none;
-
-    background: none;
-
-    cursor: pointer;
-
-    font-size: 17px;
-
-    margin-right: 10px;
-
-}
-
-.edit {
-
-    color: #2563EB;
-
-}
-
-.delete {
-
-    color: #EF4444;
-
-}
-
-/* ===========================
-   Responsive Table
-=========================== */
-
+/* Force table to behave correctly */
 .table-responsive {
     width: 100%;
     overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
 }
 
 .table-responsive table {
-    min-width: 900px;
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    /* This prevents collapsing */
 }
 
-@media (max-width:768px) {
+/* Consistent cell padding and width */
+th,
+td {
+    padding: 16px;
+    text-align: left;
+    border-bottom: 1px solid #E5E7EB;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 
-    .patient-table {
-        padding: 15px;
-    }
+/* Set specific width for Actions column to keep it tidy */
+th:last-child,
+td:last-child {
+    width: 100px;
+    text-align: center;
+}
 
-    .table-header {
-        display: flex;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 15px;
-    }
+/* Status Badge Styles */
+.status {
+    padding: 6px 14px;
+    border-radius: 30px;
+    font-size: 13px;
+}
 
-    .search-box {
-        width: 100%;
-    }
+.admitted {
+    background: #DCFCE7;
+    color: #15803D;
+}
 
-    .search-box input {
-        width: 100%;
-    }
+/* Action Buttons */
+/* Container to hold buttons horizontally */
+.action-buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    /* Spacing between Edit and Delete */
+}
 
+/* Updated button styles */
+.edit,
+.delete {
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 17px;
+    margin: 0;
+    /* Remove margin to rely on container gap */
+    display: flex;
+    align-items: center;
+}
+
+.edit {
+    color: #2563EB;
+}
+
+.delete {
+    color: #EF4444;
+}
+
+/* Ensure the action column doesn't restrict the flex container */
+td:last-child {
+    overflow: visible;
 }

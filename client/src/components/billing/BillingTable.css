@@ -1,106 +1,40 @@
+/* ===========================
+   Base Table Container
+=========================== */
 .patient-table {
-
     background: white;
-
     border-radius: 18px;
-
     padding: 25px;
-
     box-shadow: 0 10px 25px rgba(0, 0, 0, .05);
-
 }
 
 .table-header {
-
     display: flex;
-
     justify-content: space-between;
-
     margin-bottom: 20px;
-
 }
 
 .search-box {
-
     display: flex;
-
     align-items: center;
-
     gap: 12px;
-
     background: #F8FAFC;
-
     border: 1px solid #E5E7EB;
-
     padding: 12px 18px;
-
     border-radius: 12px;
-
     width: 320px;
-
 }
 
 .search-box input {
-
     border: none;
-
     outline: none;
-
     background: none;
-
     width: 100%;
-
-}
-
-.status {
-
-    padding: 6px 14px;
-
-    border-radius: 30px;
-
-    font-size: 13px;
-
-}
-
-.admitted {
-
-    background: #DCFCE7;
-
-    color: #15803D;
-
-}
-
-.edit,
-.delete {
-
-    border: none;
-
-    background: none;
-
-    cursor: pointer;
-
-    font-size: 17px;
-
-    margin-right: 10px;
-
-}
-
-.edit {
-
-    color: #2563EB;
-
-}
-
-.delete {
-
-    color: #EF4444;
-
 }
 
 /* ===========================
-   Responsive Table
+   Table Styling & Fix
 =========================== */
-
 .table-responsive {
     width: 100%;
     overflow-x: auto;
@@ -108,17 +42,107 @@
 }
 
 .table-responsive table {
+    width: 100%;
     min-width: 950px;
+    border-collapse: collapse;
 }
 
-@media (max-width:768px) {
+/* FORCE ACTION COLUMN VISIBILITY */
+.table-responsive table td:last-child {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    width: 120px;
+    /* Give the Action column a fixed minimum width */
+    min-width: 120px;
+    padding: 8px;
+}
 
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+    /* Adds space between the buttons */
+    width: 100%;
+}
+.action-buttons button {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 32px !important;
+    /* Ensure the button has enough width */
+    height: 32px !important;
+    /* Ensure the button has enough height */
+    padding: 0 !important;
+    margin: 0 4px !important;
+    /* Proper spacing between buttons */
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+.action-buttons button svg {
+    width: 18px !important;
+    /* Explicit size for the icon */
+    height: 18px !important;
+    display: block;
+}
+/* ===========================
+   Buttons & Status
+=========================== */
+.status {
+    padding: 6px 14px;
+    border-radius: 30px;
+    font-size: 13px;
+}
+
+.admitted {
+    background: #DCFCE7;
+    color: #15803D;
+}
+
+.edit,
+.delete,
+.pdf {
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 20px;
+    /* Increase size slightly for better visibility */
+    padding: 8px;
+    /* Increase padding to prevent clipping */
+    display: flex;
+    /* Use flex to center the icon inside the button */
+    align-items: center;
+    justify-content: center;
+    color: #64748B;
+    /* Default icon color */
+}
+
+.edit {
+    color: #2563EB;
+}
+
+.delete {
+    color: #EF4444;
+}
+
+.pdf {
+    color: #64748B;
+}
+
+/* Added color for PDF preview icon */
+
+/* ===========================
+   Responsive
+=========================== */
+@media (max-width:768px) {
     .patient-table {
         padding: 15px;
     }
 
     .table-header {
-        display: flex;
         flex-direction: column;
         align-items: stretch;
         gap: 15px;
@@ -127,9 +151,4 @@
     .search-box {
         width: 100%;
     }
-
-    .search-box input {
-        width: 100%;
-    }
-
 }

@@ -12,9 +12,7 @@ const LoginForm = () => {
   const { login } = useAuth();
 
   const [showPassword, setShowPassword] = useState(false);
-
   const [username, setUsername] = useState("");
-
   const [password, setPassword] = useState("");
 
   const handleLogin = async (e) => {
@@ -37,7 +35,14 @@ const LoginForm = () => {
 
       toast.success(data.message);
 
-      navigate("/dashboard");
+      // 🚦 THE TRAFFIC COP (ROLE-BASED REDIRECT)
+      if (data.user.role === "doctor") {
+        navigate("/doctor/dashboard");
+      } else if (data.user.role === "receptionist") {
+        navigate("/receptionist/dashboard");
+      } else {
+        navigate("/dashboard"); // Admins go here!
+      }
     } catch (error) {
       toast.error(error.response?.data?.message || "Login Failed");
     }

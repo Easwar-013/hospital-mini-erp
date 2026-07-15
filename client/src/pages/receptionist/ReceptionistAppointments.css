@@ -1,0 +1,58 @@
+/* ReceptionistAppointments.css */
+
+.admin-content {
+    padding: 20px;
+    background: #f9fafb;
+    min-height: 100vh;
+}
+
+.appointments-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.appointments-table th {
+    background: #f3f4f6;
+    padding: 15px;
+    text-align: left;
+    color: #374151;
+    font-weight: 600;
+}
+
+.appointments-table td {
+    padding: 15px;
+    border-bottom: 1px solid #e5e7eb;
+    color: #1f2937;
+}
+
+.appointments-table tr:hover {
+    background-color: #f9fafb;
+}
+
+/* Optional: Add status badge styling if needed */
+.status-badge {
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.receptionist-page-header {
+    background: #2563EB;
+    /* Same color as your dashboard */
+    padding: 15px 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+.receptionist-page-header h1 {
+    color: white;
+    font-size: 20px;
+    /* Much smaller than the banner */
+    margin: 0;
+}

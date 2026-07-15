@@ -1,0 +1,119 @@
+.receptionist-content {
+    padding: 20px;
+}
+
+.receptionist-page-header {
+    background: #2563EB;
+    padding: 15px 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    color: white;
+}
+
+.receptionist-patient-form {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 500px;
+}
+
+.receptionist-patient-form textarea {
+    grid-column: span 2;
+    /* Makes it span across both columns */
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    resize: vertical;
+    /* Allows user to resize height if needed */
+    width: 100%;
+    box-sizing: border-box;
+    /* Ensures padding doesn't push it out of bounds */
+    font-family: inherit;
+}
+
+/* Optional: Ensure the button also spans full width if desired */
+.receptionist-save-btn {
+    grid-column: span 2;
+}
+
+.receptionist-patient-form input,
+.receptionist-patient-form select {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.receptionist-save-btn {
+    background: #2563EB;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.receptionist-table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+    background: white;
+}
+
+.receptionist-table th,
+.receptionist-table td {
+    padding: 15px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+/* Container for buttons to align them side-by-side */
+.form-action-buttons {
+    grid-column: span 2;
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.receptionist-save-btn {
+    flex: 1;
+    /* Makes button fill available space */
+}
+
+/* Red Cancel button style */
+.receptionist-cancel-btn {
+    flex: 1;
+    background: #ef4444;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.receptionist-cancel-btn:hover {
+    background: #dc2626;
+}
+
+/* Edit button in the table */
+.table-edit-btn {
+    background: none;
+    border: none;
+    color: #2563EB;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+
+.table-edit-btn:hover {
+    background: #eff6ff;
+}

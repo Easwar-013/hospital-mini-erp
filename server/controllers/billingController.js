@@ -1,7 +1,5 @@
 import Bill from "../models/Bill.js";
-
 import Patient from "../models/Patient.js";
-
 
 // =========================================
 // Create Bill
@@ -9,10 +7,20 @@ import Patient from "../models/Patient.js";
 export const createBill = async (req, res) => {
   try {
     console.log(req.body);
-    const count = await Bill.countDocuments();
+    
+    // Find the latest bill based on invoice number to maintain sequence
+    const lastBill = await Bill.findOne().sort({ invoiceNumber: -1 });
+    
+    let nextNumber = 1;
+    // Standardize using 'lastBill' consistently
+    if (lastBill && lastBill.invoiceNumber) {
+        const currentNum = parseInt(lastBill.invoiceNumber.replace('INV', ''), 10);
+        if (!isNaN(currentNum)) {
+            nextNumber = currentNum + 1;
+        }
+    } 
 
-    const invoiceNumber =
-      "INV" + String(count + 1).padStart(4, "0");
+    const invoiceNumber = "INV" + String(nextNumber).padStart(4, "0");
 
     const consultationFee = Number(req.body.consultationFee || 0);
     const wardCharge = Number(req.body.wardCharge || 0);
@@ -56,8 +64,6 @@ export const createBill = async (req, res) => {
   } catch (error) {
       console.log("========== BILL ERROR ==========");
       console.log(error);
-      console.log(error.stack);
-
       res.status(500).json({
         success: false,
         message: error.message,
@@ -77,15 +83,9 @@ export const getBills = async (req, res) => {
       .sort({ createdAt: -1 })
       .lean();
 
-    res.status(200).json({
-      success: true,
-      bills,
-    });
+    res.status(200).json({ success: true, bills });
   } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: error.message,
-    });
+    res.status(500).json({ success: false, message: error.message });
   }
 };
 
@@ -94,37 +94,16 @@ export const getBills = async (req, res) => {
 // =========================================
 export const getMyBills = async (req, res) => {
   try {
-    console.log("Logged In Patient:", req.user);
-
-    // Find hospital patient using phone number
-    const patient = await Patient.findOne({
-      phone: req.user.phone,
-    });
-
+    const patient = await Patient.findOne({ phone: req.user.phone });
     if (!patient) {
-      return res.status(404).json({
-        success: false,
-        message: "Patient not found",
-      });
+      return res.status(404).json({ success: false, message: "Patient not found" });
     }
-
-    const bills = await Bill.find({
-      patient: patient._id,
-    })
+    const bills = await Bill.find({ patient: patient._id })
       .populate("doctor", "fullName specialization")
       .sort({ createdAt: -1 });
-
-    res.status(200).json({
-      success: true,
-      bills,
-    });
+    res.status(200).json({ success: true, bills });
   } catch (error) {
-    console.log(error);
-
-    res.status(500).json({
-      success: false,
-      message: error.message,
-    });
+    res.status(500).json({ success: false, message: error.message });
   }
 };
 
@@ -133,63 +112,26 @@ export const getMyBills = async (req, res) => {
 // =========================================
 export const updateBill = async (req, res) => {
   try {
-    const consultationFee = Number(req.body.consultationFee || 0);
-    const wardCharge = Number(req.body.wardCharge || 0);
-    const medicineCharge = Number(req.body.medicineCharge || 0);
-    const labCharge = Number(req.body.labCharge || 0);
-    const otherCharge = Number(req.body.otherCharge || 0);
-    const discount = Number(req.body.discount || 0);
-
-    const totalAmount =
-      consultationFee +
-      wardCharge +
-      medicineCharge +
-      labCharge +
-      otherCharge -
-      discount;
+    const totalAmount = (Number(req.body.consultationFee) || 0) +
+                        (Number(req.body.wardCharge) || 0) +
+                        (Number(req.body.medicineCharge) || 0) +
+                        (Number(req.body.labCharge) || 0) +
+                        (Number(req.body.otherCharge) || 0) -
+                        (Number(req.body.discount) || 0);
 
     if (totalAmount < 0) {
-      return res.status(400).json({
-        success: false,
-        message: "Total amount cannot be negative.",
-      });
+      return res.status(400).json({ success: false, message: "Total amount cannot be negative." });
     }
 
-    const bill = await Bill.findByIdAndUpdate(
-      req.params.id,
-      {
-        ...req.body,
-        consultationFee,
-        wardCharge,
-        medicineCharge,
-        labCharge,
-        otherCharge,
-        discount,
-        totalAmount,
-      },
-      {
-        new: true,
-        runValidators: true,
-      }
+    const bill = await Bill.findByIdAndUpdate(req.params.id, 
+        { ...req.body, totalAmount }, 
+        { new: true, runValidators: true }
     );
 
-    if (!bill) {
-      return res.status(404).json({
-        success: false,
-        message: "Bill Not Found",
-      });
-    }
-
-    res.status(200).json({
-      success: true,
-      message: "Bill Updated Successfully",
-      bill,
-    });
+    if (!bill) return res.status(404).json({ success: false, message: "Bill Not Found" });
+    res.status(200).json({ success: true, message: "Bill Updated Successfully", bill });
   } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: error.message,
-    });
+    res.status(500).json({ success: false, message: error.message });
   }
 };
 
@@ -199,22 +141,9 @@ export const updateBill = async (req, res) => {
 export const deleteBill = async (req, res) => {
   try {
     const bill = await Bill.findByIdAndDelete(req.params.id);
-
-    if (!bill) {
-      return res.status(404).json({
-        success: false,
-        message: "Bill Not Found",
-      });
-    }
-
-    res.status(200).json({
-      success: true,
-      message: "Bill Deleted Successfully",
-    });
+    if (!bill) return res.status(404).json({ success: false, message: "Bill Not Found" });
+    res.status(200).json({ success: true, message: "Bill Deleted Successfully" });
   } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: error.message,
-    });
+    res.status(500).json({ success: false, message: error.message });
   }
 };

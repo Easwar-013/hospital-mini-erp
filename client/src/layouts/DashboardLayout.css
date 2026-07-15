@@ -1,49 +1,50 @@
 .dashboard-layout {
     display: flex;
-    min-height: 100vh;
+    height: 100vh;
+    /* Locked to the viewport height */
+    width: 100vw;
+    /* Locked to the viewport width */
     background: #f5f7fb;
+    overflow: hidden;
+    /* Prevents the whole page from scrolling */
 }
 
 .dashboard-main {
-    margin-left: 270px;
-    width: calc(100% - 270px);
-    min-height: 100vh;
+    flex: 1;
     display: flex;
     flex-direction: column;
+    height: 100vh;
+    /* Ensures it fills the screen */
+    overflow-y: auto;
+    /* THIS IS THE FIX: Only this area will scroll */
+    overflow-x: hidden;
     transition: all 0.3s ease;
 }
 
 .dashboard-content {
     padding: 25px;
-    flex: 1;
+    /* Remove 'flex: 1' here if it conflicts with internal scrolling */
+    width: 100%;
+    box-sizing: border-box;
 }
 
 /* TABLET VIEW */
 @media screen and (max-width: 900px) {
-    .dashboard-main {
-        margin-left: 80px;
-        width: calc(100% - 80px);
-    }
 
+    /* No manual margin or width needed; flex handles it */
     .dashboard-content {
         padding: 20px;
     }
 }
 
-
-
-/* ===================================
-   MOBILE RESPONSIVENESS (Layout Stack)
-=================================== */
+/* MOBILE RESPONSIVENESS */
 @media screen and (max-width: 768px) {
     .dashboard-layout {
         flex-direction: column !important;
-        /* Forces the stack */
     }
 
     .dashboard-main {
         margin-left: 0 !important;
-        /* Removes the gap for the desktop sidebar */
         width: 100% !important;
         min-height: auto;
     }

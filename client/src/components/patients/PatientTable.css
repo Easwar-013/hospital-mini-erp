@@ -70,31 +70,35 @@
 
 }
 
+/* Container to hold buttons horizontally */
+.action-buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    /* Adjust spacing between buttons here */
+}
+
+/* Updated button styles */
 .edit,
 .delete {
-
     border: none;
-
     background: none;
-
     cursor: pointer;
-
     font-size: 17px;
-
-    margin-right: 10px;
-
+    margin-right: 0;
+    /* Removed margin-right to fix alignment */
+    display: flex;
+    /* Helps center the icon */
+    align-items: center;
 }
 
 .edit {
-
     color: #2563EB;
-
 }
 
 .delete {
-
     color: #EF4444;
-
 }
 /* ===========================
    Responsive Table

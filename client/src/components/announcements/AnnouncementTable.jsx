@@ -84,7 +84,6 @@ const AnnouncementTable = ({ announcements, onEdit, onDelete }) => {
                     >
                       <FaEdit />
                     </button>
-
                     <button
                       className="delete-btn"
                       onClick={() => handleDelete(announcement._id)}

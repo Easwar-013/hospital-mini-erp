@@ -9,6 +9,8 @@ import "./AddDoctorModal.css";
 const AddDoctorModal = ({ isOpen, onClose, selectedDoctor, onDoctorSaved }) => {
   const [formData, setFormData] = useState({
     fullName: "",
+    username: "",
+    password: "",
     specialization: "Cardiology",
     experience: "",
     phone: "",
@@ -20,17 +22,22 @@ const AddDoctorModal = ({ isOpen, onClose, selectedDoctor, onDoctorSaved }) => {
   useEffect(() => {
     if (selectedDoctor) {
       setFormData({
-        fullName: selectedDoctor.fullName,
-        specialization: selectedDoctor.specialization,
-        experience: selectedDoctor.experience,
-        phone: selectedDoctor.phone,
-        email: selectedDoctor.email,
-        qualification: selectedDoctor.qualification,
-        status: selectedDoctor.status,
+        fullName: selectedDoctor.fullName || "",
+        // Look for the username inside the populated userId object
+        username: selectedDoctor.userId?.username || "",
+        password: "", // Keep empty for security
+        specialization: selectedDoctor.specialization || "Cardiology",
+        experience: selectedDoctor.experience || "",
+        phone: selectedDoctor.phone || "",
+        email: selectedDoctor.email || "",
+        qualification: selectedDoctor.qualification || "",
+        status: selectedDoctor.status || "Available",
       });
     } else {
       setFormData({
         fullName: "",
+        username: "",
+        password: "",
         specialization: "Cardiology",
         experience: "",
         phone: "",
@@ -53,7 +60,13 @@ const AddDoctorModal = ({ isOpen, onClose, selectedDoctor, onDoctorSaved }) => {
 
     try {
       if (selectedDoctor) {
-        await updateDoctor(selectedDoctor._id, formData);
+        // If the password field is empty during an edit, remove it so it doesn't overwrite with a blank string
+        const updateData = { ...formData };
+        if (!updateData.password) {
+          delete updateData.password;
+        }
+
+        await updateDoctor(selectedDoctor._id, updateData);
 
         addNotification({
           icon: "👨‍⚕️",
@@ -63,7 +76,10 @@ const AddDoctorModal = ({ isOpen, onClose, selectedDoctor, onDoctorSaved }) => {
 
         toast.success("Doctor Updated Successfully");
       } else {
-        await addDoctor(formData);
+        // Automatically assign the role of "doctor" for the backend
+        const newDoctorData = { ...formData, role: "doctor" };
+
+        await addDoctor(newDoctorData);
 
         addNotification({
           icon: "👨‍⚕️",
@@ -75,14 +91,12 @@ const AddDoctorModal = ({ isOpen, onClose, selectedDoctor, onDoctorSaved }) => {
       }
 
       onDoctorSaved();
-
       onClose();
     } catch (error) {
       toast.error(error.response?.data?.message || "Operation Failed");
     }
   };
 
-  
   if (!isOpen) return null;
 
   return (
@@ -110,7 +124,39 @@ const AddDoctorModal = ({ isOpen, onClose, selectedDoctor, onDoctorSaved }) => {
               placeholder="Enter doctor name"
               value={formData.fullName}
               onChange={handleChange}
+              required
             />
+          </div>
+
+          {/* New Portal Credentials Section */}
+          <div className="form-row">
+            <div className="form-group">
+              <label>Portal Username</label>
+              <input
+                type="text"
+                name="username"
+                placeholder="dr_smith"
+                value={formData.username}
+                onChange={handleChange}
+                required={!selectedDoctor} // Only require when adding
+              />
+            </div>
+
+            <div className="form-group">
+              <label>Portal Password</label>
+              <input
+                type="password"
+                name="password"
+                placeholder={
+                  selectedDoctor
+                    ? "Leave blank to keep current"
+                    : "Enter password"
+                }
+                value={formData.password}
+                onChange={handleChange}
+                required={!selectedDoctor} // Only require when adding
+              />
+            </div>
           </div>
 
           <div className="form-row">
@@ -167,7 +213,9 @@ const AddDoctorModal = ({ isOpen, onClose, selectedDoctor, onDoctorSaved }) => {
                 onChange={handleChange}
               />
             </div>
+          </div>
 
+          <div className="form-row">
             <div className="form-group">
               <label>Qualification</label>
 

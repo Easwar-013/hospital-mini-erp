@@ -30,6 +30,11 @@ const patientSchema = new mongoose.Schema(
       required: true,
     },
 
+    email: {
+      type: String,
+      required: false, // Set to false if existing patients don't have emails
+    },
+
     doctor: {
       type: String,
       required: true,
@@ -50,10 +55,14 @@ const patientSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "PatientUser"
+    },
   },
   {
     timestamps: true,
   }
 );
 
-export default mongoose.model("Patient", patientSchema);
+export default mongoose.model("Patient", patientSchema, "patients");

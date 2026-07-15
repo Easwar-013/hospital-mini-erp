@@ -1,0 +1,72 @@
+.profile-container {
+    max-width: 800px;
+    /* Increased from 600px */
+    margin: 40px auto;
+    padding: 40px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.profile-container h2 {
+    margin-bottom: 30px;
+    color: #1e293b;
+    text-align: center;
+}
+
+.profile-container form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* Creates two columns */
+    gap: 20px;
+}
+
+/* Make the button span across both columns */
+.profile-container button {
+    grid-column: span 2;
+    margin-top: 10px;
+    padding: 14px;
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.profile-container input {
+    padding: 14px 16px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 16px;
+    outline: none;
+}
+
+.profile-container input:focus {
+    border-color: #3b82f6;
+}
+
+.profile-container button:hover {
+    background-color: #1d4ed8;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    /* Space between label and input */
+}
+
+.form-group label {
+    font-weight: 600;
+    color: #475569;
+    font-size: 14px;
+}
+
+/* Ensure form still uses the grid layout */
+.profile-container form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}

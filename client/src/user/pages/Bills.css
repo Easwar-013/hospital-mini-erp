@@ -1,69 +1,72 @@
 .user-bills {
     padding: 30px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
-.user-bills h1 {
-    color: #1e3a8a;
-    margin-bottom: 25px;
+.table-responsive {
+    width: 100%;
+    overflow-x: hidden;
+    /* Removes horizontal scroll */
 }
 
-.bill-card {
-    background: #fff;
-    border-radius: 12px;
-    padding: 30px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    text-align: center;
+.bill-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
 }
 
-.bill-card h3 {
-    margin-bottom: 10px;
-    color: #2563eb;
+.bill-table th,
+.bill-table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
 }
 
-.bill-card p {
-    color: #666;
+/* Action Column Width */
+.bill-table th:last-child,
+.bill-table td:last-child {
+    width: 250px;
 }
 
 .pdf-actions {
     display: flex;
-    gap: 10px;
+    gap: 8px;
     align-items: center;
 }
 
-.preview-btn {
-    background: #2563eb;
-    color: #fff;
+.preview-btn,
+.download-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
     border: none;
-    padding: 8px 14px;
-    border-radius: 8px;
-    cursor: pointer;
+    padding: 8px 16px;
+    border-radius: 6px;
     font-size: 14px;
-    transition: .3s;
+    font-weight: 500;
+    color: #FFFFFF !important;
+    /* Forces white text */
+    cursor: pointer;
+    white-space: nowrap;
+    transition: 0.3s;
+}
+
+.preview-btn {
+    background-color: #2563eb;
 }
 
 .preview-btn:hover {
-    background: #1d4ed8;
+    background-color: #1d4ed8;
 }
 
 .download-btn {
-    background: #16a34a;
-    color: #fff;
-    border: none;
-    padding: 8px 14px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: .3s;
+    background-color: #16a34a;
 }
 
 .download-btn:hover {
-    background: #15803d;
-}
-
-/* Enables smooth horizontal scrolling on mobile */
-.table-responsive {
-    width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    border-radius: 8px;
+    background-color: #15803d;
 }

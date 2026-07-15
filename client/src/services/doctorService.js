@@ -1,8 +1,13 @@
 import api from "./axios";
 
 // Get All Doctors
+export const getDoctorDashboardStats = async () => {
+  const response = await api.get("/appointments/doctor-dashboard");
+  return response.data; // Ensure this matches what your backend returns
+};
+
 export const getDoctors = async () => {
-  const response = await api.get("/doctors");
+ const response = await api.get("/doctors");
   return response.data.doctors;
 };
 

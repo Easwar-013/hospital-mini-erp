@@ -31,3 +31,8 @@ export const deleteAppointment = async (id) => {
   const response = await api.delete(`/appointments/${id}`);
   return response.data;
 };
+
+export const getDoctorDashboardAppointments = async () => {
+  const response = await api.get("/appointments/doctor-dashboard");
+  return response.data.appointments;
+};

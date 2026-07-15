@@ -51,6 +51,18 @@ export const bookAppointment = async (req, res) => {
       status: "Pending Approval",
     });
 
+    // ==========================================
+    // 📢 TRIGGER LIVE UPDATE TO ADMIN
+    // ==========================================
+    const io = req.app.get("io");
+    if (io) {
+      console.log("⚡ Broadcasting new patient appointment to Admin!");
+      io.emit("appointmentUpdated");
+    } else {
+      console.log("🔴 ERROR: Socket not found on req.app!");
+    }
+    // ==========================================
+
     res.status(201).json({
       success: true,
       message: "Appointment request submitted successfully",
