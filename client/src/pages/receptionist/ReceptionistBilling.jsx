@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import jsPDF from "jspdf";
-import "jspdf-autotable";
+import autoTable from "jspdf-autotable";
 import { getBills } from "../../services/billingService";
 import BillingTable from "../../components/billing/BillingTable";
 import GenerateBillModal from "../../components/billing/GenerateBillModal";
