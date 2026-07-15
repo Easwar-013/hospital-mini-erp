@@ -2,7 +2,12 @@ import { Outlet } from "react-router-dom";
 import ReceptionistSidebar from "../components/layout/ReceptionistSidebar";
 import Navbar from "../components/layout/Navbar";
 
-import { FaChartPie, FaCalendarCheck, FaUserPlus } from "react-icons/fa";
+import {
+  FaChartPie,
+  FaCalendarCheck,
+  FaUserPlus,
+  FaFileInvoiceDollar,
+} from "react-icons/fa";
 
 const ReceptionistLayout = () => {
   // Define items specific to the receptionist's role
@@ -21,6 +26,11 @@ const ReceptionistLayout = () => {
       name: "Register Patient",
       icon: <FaUserPlus />,
       path: "/receptionist/register-patient",
+    },
+    {
+      name: "Billing",
+      icon: <FaFileInvoiceDollar />,
+      path: "/receptionist/billing",
     },
   ];
 

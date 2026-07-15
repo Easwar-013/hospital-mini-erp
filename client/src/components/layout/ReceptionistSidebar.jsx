@@ -5,6 +5,7 @@ import {
   FaUserPlus,
   FaSignOutAlt,
   FaBullhorn,
+  FaFileInvoiceDollar,
 } from "react-icons/fa";
 import { NavLink, useNavigate } from "react-router-dom";
 import "./Sidebar.css"; // Reuse your existing CSS
@@ -26,6 +27,11 @@ const ReceptionistSidebar = () => {
       name: "Register Patient",
       icon: <FaUserPlus />,
       path: "/receptionist/register-patient",
+    },
+    {
+      name: "Billing", // Add this menu item
+      icon: <FaFileInvoiceDollar />,
+      path: "/receptionist/billing",
     },
     {
       name: "Announcements",
