@@ -53,7 +53,7 @@ io.on("connection", (socket) => {
 
 // Middleware
 app.use(cors({
-  origin: "https://hospital-mini-erp.onrender.com", // Be specific instead of "*"
+  origin: "https://hospital-mini-erp-zeta.vercel.app", // Be specific instead of "*"
   credentials: true
 }));
 app.use(express.json());
