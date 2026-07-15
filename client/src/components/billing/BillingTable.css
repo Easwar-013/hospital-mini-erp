@@ -81,6 +81,12 @@
     background: transparent;
     cursor: pointer;
 }
+.header-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
 
 .action-buttons button svg {
     width: 18px !important;

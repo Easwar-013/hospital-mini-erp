@@ -70,7 +70,7 @@ const ReceptionistBilling = () => {
           setIsModalOpen(true);
         }}
         onDelete={fetchBills}
-        onPreview={() => toast.info("PDF Preview feature coming soon")}
+        onPreview={handlePreviewPDF}
       />
       <GenerateBillModal
         isOpen={isModalOpen}
