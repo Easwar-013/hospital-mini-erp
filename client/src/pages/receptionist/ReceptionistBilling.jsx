@@ -31,7 +31,7 @@ const ReceptionistBilling = () => {
     doc.text(`Total Amount: ₹ ${bill.totalAmount}`, 10, 30);
 
     // Add table if needed
-    doc.autoTable({
+    autoTable({
       head: [["Description", "Amount"]],
       body: [
         ["Consultation", bill.consultationFee],
