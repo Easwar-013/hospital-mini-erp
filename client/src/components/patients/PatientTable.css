@@ -106,12 +106,20 @@
 
 .table-responsive {
     width: 100%;
+    /* Ensure the container itself can scroll */
     overflow-x: auto;
+    /* Enable momentum-based scrolling on iOS */
     -webkit-overflow-scrolling: touch;
+    /* Force display to block */
+    display: block;
 }
 
+/* Ensure the table doesn't try to shrink below its min-width */
 .table-responsive table {
-    min-width: 1000px;
+    width: 100%;
+    min-width: 700px;
+    /* Reduced from 1000px to better fit tablet/mobile */
+    border-collapse: collapse;
 }
 
 @media (max-width:768px) {
