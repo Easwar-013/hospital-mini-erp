@@ -79,9 +79,11 @@
 
 .custom-table {
     width: 100%;
-    min-width: 600px;
-    /* Forces the table to maintain width so it scrolls */
     border-collapse: collapse;
+    table-layout: auto;
+    /* Changed from fixed to auto to allow scrolling */
+    min-width: 600px;
+    /* This ensures the scrollbar triggers */
 }
 
 @media (max-width: 768px) {
