@@ -5,6 +5,8 @@
     border-radius: 18px;
     margin-top: 25px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, .05);
+    width: 100%;
+    overflow: visible;
 }
 
 /* Search bar styling to match Appointment module */
@@ -70,11 +72,13 @@
 /* Add this to AnnouncementTable.css */
 /* Update these rules in AnnouncementTable.css */
 .table-responsive {
-    width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    display: block;
-    /* Important for scrollable containers */
+    /* Force the scrollable area to take full available space */
+    display: block !important;
+    width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    /* This ensures it creates a scrollbar */
+    max-width: 100vw;
 }
 
 .custom-table {
