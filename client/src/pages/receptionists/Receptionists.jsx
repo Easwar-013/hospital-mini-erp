@@ -113,43 +113,45 @@ const Receptionists = () => {
           />
         </div>
 
-        <table>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Phone</th>
-              <th>Status</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredReceptionists.map((r) => (
-              <tr key={r._id}>
-                <td>{r._id.slice(-6)}</td>
-                <td>{r.name}</td>
-                <td>{r.email}</td>
-                <td>{r.phone || "N/A"}</td>
-                <td>
-                  <span
-                    className={`badge ${r.status === "Active" ? "available" : "inactive"}`}
-                  >
-                    {r.status || "Active"}
-                  </span>
-                </td>
-                <td>
-                  <button onClick={() => handleEdit(r)}>
-                    <FaEdit />
-                  </button>
-                  <button onClick={() => handleDelete(r._id)}>
-                    <FaTrash />
-                  </button>
-                </td>
+        <div className="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Status</th>
+                <th>Action</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {filteredReceptionists.map((r) => (
+                <tr key={r._id}>
+                  <td>{r._id.slice(-6)}</td>
+                  <td>{r.name}</td>
+                  <td>{r.email}</td>
+                  <td>{r.phone || "N/A"}</td>
+                  <td>
+                    <span
+                      className={`badge ${r.status === "Active" ? "available" : "inactive"}`}
+                    >
+                      {r.status || "Active"}
+                    </span>
+                  </td>
+                  <td>
+                    <button onClick={() => handleEdit(r)}>
+                      <FaEdit />
+                    </button>
+                    <button onClick={() => handleDelete(r._id)}>
+                      <FaTrash />
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );
