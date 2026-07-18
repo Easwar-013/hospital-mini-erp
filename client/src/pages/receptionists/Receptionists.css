@@ -162,3 +162,31 @@ td button:last-child {
     border-radius: 5px;
     cursor: pointer;
 }
+
+/* Add these styles to Receptionists.css */
+
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+    /* Enables horizontal scroll */
+    -webkit-overflow-scrolling: touch;
+    /* Smooth scrolling on iOS */
+    margin-top: 10px;
+    padding-bottom: 10px;
+    /* Prevents scrollbar from touching content */
+}
+
+/* Ensure table has a minimum width to trigger the scrollbar */
+.table-container table {
+    width: 100%;
+    min-width: 600px;
+    /* Adjust this value if your table columns are wider */
+    border-collapse: collapse;
+}
+
+/* Optional: Add mobile-specific padding adjustment */
+@media (max-width: 768px) {
+    .admin-dashboard-box {
+        padding: 15px;
+    }
+}
