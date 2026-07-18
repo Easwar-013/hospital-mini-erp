@@ -66,3 +66,32 @@
 .delete-btn {
     color: #EF4444;
 }
+
+/* Add this to AnnouncementTable.css */
+/* Update these rules in AnnouncementTable.css */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    display: block;
+    /* Important for scrollable containers */
+}
+
+.custom-table {
+    width: 100%;
+    min-width: 600px;
+    /* Forces the table to maintain width so it scrolls */
+    border-collapse: collapse;
+}
+
+@media (max-width: 768px) {
+    .table-card {
+        padding: 15px;
+    }
+
+    .table-responsive {
+        /* Prevents the table from pushing the entire page width */
+        width: 100%;
+        max-width: 100%;
+    }
+}
