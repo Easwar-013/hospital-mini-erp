@@ -104,28 +104,27 @@
    Responsive Table
 =========================== */
 
-.table-responsive {
-    width: 100%;
-    /* Ensure the container itself can scroll */
-    overflow-x: auto;
-    /* Enable momentum-based scrolling on iOS */
-    -webkit-overflow-scrolling: touch;
-    /* Force display to block */
-    display: block;
+.patient-table .table-responsive {
+    width: 100% !important;
+    overflow-x: auto !important;
+    display: block !important;
+    -webkit-overflow-scrolling: touch !important;
 }
 
-/* Ensure the table doesn't try to shrink below its min-width */
-.table-responsive table {
-    width: 100%;
-    min-width: 700px;
-    /* Reduced from 1000px to better fit tablet/mobile */
+.patient-table .table-responsive table {
+    display: table !important;
+    /* Ensure it stays as a table */
+    width: 100% !important;
+    min-width: 700px !important;
     border-collapse: collapse;
 }
 
 @media (max-width: 768px) {
     .patient-table {
-        padding: 15px;
-    }
+            padding: 15px;
+            /* Ensure the main container doesn't overflow */
+            overflow: hidden;
+        }
 
     .table-header {
         flex-direction: column;
@@ -141,10 +140,9 @@
     }
 
     /* Target the table container specifically for small screens */
-    .table-responsive {
-        /* Restrict width to the viewport to force internal scroll */
-        width: calc(100vw - 50px);
-        /* 50px accounts for parent padding/margins */
-        margin: 0 auto;
-    }
+        .table-responsive {
+            /* Force the width to be limited by the screen */
+            width: 100% !important;
+            max-width: 100% !important;
+        }
 }
